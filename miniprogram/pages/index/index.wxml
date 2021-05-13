@@ -1,0 +1,8 @@
+<button type="primary" bindtap="getData">get datas</button>
+<view wx:for="{{dataObj}}" wx:key = "index">
+  <view>Name: {{item.name}}</view>
+  <view>Sex: {{item.sex}}</view>
+  <view>Born Date: {{item.born_time}}</view>
+  <view>Married: {{item.married}}</view>
+  <view>-------------------</view>
+</view>
