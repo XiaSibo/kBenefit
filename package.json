@@ -1,0 +1,23 @@
+{
+  "name": "kbenefit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@vant/weapp": "^1.6.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XiaSibo/kBenefit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XiaSibo/kBenefit/issues"
+  },
+  "homepage": "https://github.com/XiaSibo/kBenefit#readme"
+}
