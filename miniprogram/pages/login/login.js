@@ -1,25 +1,16 @@
-// pages/homepage/homepage.js
+// pages/login/login.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    user_id: 0,
-    user_name: "",
-    user_sex: "",
-    user_tags: [],
-    user_info: "",
-    user_avatar: ""
-
   },
 
-  change_avatar:function(){
-
+  user_login:function() {
   },
 
-  change_info:function(){
-
+  administrator_login:function() {
   },
 
   /**
