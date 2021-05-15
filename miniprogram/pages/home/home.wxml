@@ -1,2 +1,7 @@
-<!--miniprogram/pages/home/home.wxml-->
-<text>miniprogram/pages/home/home.wxml</text>
+<PostList/>
+<navigator class="comment" url="/pages/homepage/homepage">
+  <image src="/images/待评价.png"></image>
+</navigator>
+<view class="goTop" bindtap="goTop" open-type="switchTab">
+  <image src="/images/箭头 上.png"></image>
+</view>

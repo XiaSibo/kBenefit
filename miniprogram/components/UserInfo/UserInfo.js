@@ -21,23 +21,27 @@ Component({
       const _ = DB.command
 
       DB.collection('user')
-      .doc('28ee4e3e609fdbf21901b0022ee68f8d')
+      .doc('28ee4e3e609fdbf21901b0022ee68f8d')  // 获得user 的 _id 进行更换
       .get({
         success: res => {
-          console.log(res.data)
           this.setData({
             userInfo: res.data
           })
-          console.log(this.data.userInfo.tags[0])
+          
           DB.collection('tag')
-          .doc(this.data.userInfo.tags[0])
+          .where({
+            _id: _.in(this.data.userInfo.tags)
+          })
           .get({
             success: res => {
-              console.log(res)
+              this.setData({
+                tags: res.data
+              })
             }
           })
         }
       })
+
     },
     detached: function() {
       // 在组件实例被从页面节点树移除时执行

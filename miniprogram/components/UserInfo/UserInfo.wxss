@@ -1,14 +1,13 @@
 .container {
   width: 100%;
   height: fit-content;
-  border: 1px solid red;
+  background-color:rgba(230, 230, 230, 0.3);
 }
 
 .container .pic {
   width: 200rpx;
   height: 200rpx;
-  margin: 20rpx auto;
-  border: 1px solid red;
+  margin: 10rpx auto;
 }
 
 .container .pic image {
@@ -24,17 +23,20 @@
   height: 32rpx;
   margin: 20rpx auto;
   font-size: 30rpx;
-  border: 1px solid red;
 }
 
 .tags {
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
-  width: 300rpx;
+  width: 380rpx;
   height: fit-content;
-  border: 1px solid red;
 }
 .tag {
-  display: inline;
-  margin-inline-end: 30rpx;
-  border: 1px solid blue;
+  border-radius: 30rpx;
+  color: white;
+  font-size: 30rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin: 10rpx;
 }
