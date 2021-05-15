@@ -2,11 +2,19 @@
   <navigator class="homepage" url="/pages/homepage/homepage">跳转到个人主页</navigator>
   <navigator class="login" url="/pages/login/login">跳转到登录界面</navigator>
 </view>
-<van-button type="primary" bindtap="getData">get datas</van-button>
-<view wx:for="{{dataObj}}" wx:key = "index">
-  <view>Name: {{item.name}}</view>
-  <view>Sex: {{item.sex}}</view>
-  <view>Born Date: {{item.born_time}}</view>
-  <view>Married: {{item.married}}</view>
-  <view>-------------------</view>
+<view>
+    <view>
+        <view class='header'>
+            <image src='/images/wx_login.png'></image>
+        </view>
+ 
+        <view class='content'>
+            <view>申请获取以下权限</view>
+            <text>获得你的公开信息(昵称，头像等)</text>
+        </view>
+ 
+        <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            授权登录
+        </button>
+    </view>
 </view>
