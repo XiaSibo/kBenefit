@@ -1,14 +1,17 @@
 {
   "pages": [
+    "pages/user/user",
     "pages/index/index",
     "pages/homepage/homepage",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/home/home"
+    
   ],
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
     "van-image": "@vant/weapp/image/index",
     "van-tab": "@vant/weapp/tab/index",
-  "van-tabs": "@vant/weapp/tabs/index"
+    "van-tabs": "@vant/weapp/tabs/index"
   },
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -16,6 +19,22 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "云开发test",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+      "pagePath": "pages/home/home",
+      "text": "首页",
+      "iconPath": "images/首页.png",
+      "selectedIconPath": "images/首页选中.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/我的.png",
+        "selectedIconPath": "images/我的选中.png"       
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }
