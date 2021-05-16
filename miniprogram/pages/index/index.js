@@ -1,4 +1,6 @@
 const db = wx.cloud.database()
+var app = getApp()
+var openid;
 Page({
 
     /**
@@ -27,13 +29,7 @@ Page({
                                         success: res => {
                                             // 获取到用户的 openid
                                             console.log("用户的openid:" + res.data.openid);
-                                            db.collection('user').where({
-                                                _openid: res.code
-                                            }).get({
-                                                success: function (res) {
-                                                    console.log(res.data)
-                                                }
-                                            })
+                                            openid = res.data.openid;
                                         }
                                     });
                                 }
@@ -60,11 +56,32 @@ Page({
             that.setData({
                 isHide: false
             });
+            //从数据库中查找对应_openid的用户是否存在
+            db.collection('user').where({
+                _openid: openid
+            }).get({
+                success: function (res) {
+                    console.log(res.data)
+                    //如果数据库中存在openid对应用户,保存用户信息并跳转到homepage
+                    if(res.data.length != 0) {
+                        app.globalData.user = res.data
+                        wx.navigateTo({
+                          url: '/pages/homepage/homepage',
+                        })
+                    }
+                    //如果不存在该openid对应用户，则跳转到登录页面检验身份
+                    else {
+                        wx.navigateTo({
+                          url: '/pages/login/login',
+                        })
+                    }
+                }
+            })
         } else {
-            //用户按了拒绝按钮
+            //未获取到用户信息
             wx.showModal({
                 title: '警告',
-                content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+                content: '未获得授权，请检查网络条件并重试',
                 showCancel: false,
                 confirmText: '返回授权',
                 success: function (res) {
@@ -75,5 +92,11 @@ Page({
                 }
             });
         }
+    },
+
+    toLogin:function() {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
     }
 })
