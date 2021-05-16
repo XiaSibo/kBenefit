@@ -24,6 +24,8 @@ Component({
       .doc(app.globalData.user[0]._id)  // 获得user 的 _id 进行更换
       .get({
         success: res => {
+          if (res.data.avatarUrl == "")
+            res.data.avatarUrl = "/images/我的选中.png"
           this.setData({
             userInfo: res.data
           })

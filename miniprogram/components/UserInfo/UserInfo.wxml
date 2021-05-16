@@ -1,4 +1,7 @@
 <view class="container">
+  <navigator class="detail" url="/pages/homepage/homepage">
+    <image src="/images/个人信息.png"></image>
+  </navigator>
     <view class="pic">
         <image src="{{userInfo.avatarUrl}}"/>
     </view>

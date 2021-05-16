@@ -5,7 +5,6 @@
 <view>
   <navigator open-type="switchTab" url="/pages/home/home">跳转到页面3(home)</navigator>
   <navigator open-type="switchTab" url="/pages/user/user">跳转到页面4(user)</navigator>
-</view>
 <view>
     <view>
         <view class='header'>
