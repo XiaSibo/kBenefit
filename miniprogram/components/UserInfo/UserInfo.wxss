@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   width: 100%;
   height: fit-content;
   background-color:rgb(226, 226, 226, 0.3);
@@ -39,4 +40,19 @@
   padding-left: 20rpx;
   padding-right: 20rpx;
   margin: 10rpx;
+}
+
+.detail {
+  position: absolute;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  left: 15rpx;
+  top: 20rpx;
+  border: 2px solid rgba(0, 0, 0, 0.4)
+}
+.detail image {
+  padding-left: 5rpx;
+  width: 100rpx;
+  height: 100rpx;
 }

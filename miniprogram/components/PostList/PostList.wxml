@@ -1,3 +1,4 @@
+{{type}}
 <view class="container">
   <view class="post" wx:for="{{postList}}" wx:key="index">
     <view class="box">
