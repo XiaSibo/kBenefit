@@ -13,7 +13,17 @@ Component({
   data: {
     postList: [
       {
-        avatarUrl: ""
+        avatarUrl: "https://img.yzcdn.cn/vant/cat.jpeg",
+        fromTags: [
+          
+        ],
+        toTags: [
+
+        ],
+        date: "",
+        title: "这是标题",
+        text: "这是正文",
+        commentCnt: 10
       },
     ]
   },
