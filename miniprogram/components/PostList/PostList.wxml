@@ -1,1 +1,6 @@
 {{type}}
+<view class="container">
+  <view class="box" wx:for="{{1000}}" wx:key="index">
+    aaaaaaaa
+  </view>
+</view>

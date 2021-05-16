@@ -1,4 +1,4 @@
-<PostList/>
+<PostList type="all main reply"/>
 <navigator class="comment" url="/pages/homepage/homepage">
   <image src="/images/待评价.png"></image>
 </navigator>
