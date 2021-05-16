@@ -21,9 +21,11 @@ Component({
       const _ = DB.command
 
       DB.collection('user')
-      .doc('28ee4e3e609fdbf21901b0022ee68f8d')  // 获得user 的 _id 进行更换
+      .doc('b00064a7609fdcc717b4ea851638fecb')  // 获得user 的 _id 进行更换
       .get({
         success: res => {
+          if (res.data.avatarUrl == "")
+            res.data.avatarUrl = "/images/我的选中.png"
           this.setData({
             userInfo: res.data
           })
