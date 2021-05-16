@@ -71,6 +71,11 @@ Page({
                     }
                     //如果不存在该openid对应用户，则跳转到登录页面检验身份
                     else {
+                        wx.showToast({
+                            title: '您的微信账号尚未绑定',
+                            icon: 'error',
+                            duration: 2000
+                          })
                         wx.navigateTo({
                           url: '/pages/login/login',
                         })
