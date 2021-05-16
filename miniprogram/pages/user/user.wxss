@@ -11,12 +11,15 @@
   border-radius: 50%;
   right: 15rpx;
   bottom: 15rpx;
-  border: 2px solid rgba(0, 0, 0, 0.4)
 }
 .comment image {
   padding-left: 10rpx;
   width: 100rpx;
   height: 100rpx;
+  opacity: 0.5;
+}
+.comment image:hover {
+  opacity: 0.7;
 }
 
 .goTop {
@@ -26,11 +29,12 @@
   border-radius: 50%;
   left: 15rpx;
   bottom: 15rpx;
-  border: 2px solid rgba(0, 0, 0, 0.4)
 }
 .goTop image {
-  padding-left: 25rpx;
-  padding-top: 23rpx;
-  width: 50rpx;
-  height: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  opacity: 0.3;
+}
+.goTop image:hover {
+  opacity: 0.7;
 }
