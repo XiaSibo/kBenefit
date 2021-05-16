@@ -14,6 +14,7 @@ Page({
 
   change_avatar: function () {
     var that = this;
+    var cloudPath;
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -21,9 +22,29 @@ Page({
       sourceType: ['album', 'camera'],
       // 指定来源是相册还是相机，默认两个都有    
       success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-        that.data.userInfo.avatarUrl = tempFilePaths[0];
-        console.log(that.data.userInfo.avatarUrl);
+        var tempFilePaths = res.tempFilePaths[0];
+        wx.cloud.uploadFile({
+          cloudPath: Date.now() + '.png', // 上传至云端的路径
+          filePath: tempFilePaths, // 小程序临时文件路径
+          success: res => {
+            // 返回文件 ID
+            console.log(res.fileID)
+            cloudPath = res.fileID
+            that.data.userInfo.avatarUrl = cloudPath;
+            that.setData({
+              userInfo: that.data.userInfo
+            })
+            db.collection("user").doc(app.globalData.user[0]._id).update({
+              data: {
+                avatarUrl: that.data.userInfo.avatarUrl
+              },
+              success: function (res) {
+                console.log(res.data)
+              }
+            })
+          },
+          fail: console.error
+        })
       }
     })
   },
@@ -44,7 +65,7 @@ Page({
       data: {
         info: this.data.userInfo.info
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res.data)
       }
     })

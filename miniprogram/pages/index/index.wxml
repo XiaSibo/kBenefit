@@ -3,19 +3,20 @@
   <navigator class="login" url="/pages/login/login">跳转到登录界面</navigator>
 </view> -->
 <view>
-  <navigator open-type="switchTab" url="/pages/home/home">跳转到页面3(home)</navigator>
-  <navigator open-type="switchTab" url="/pages/user/user">跳转到页面4(user)</navigator>
+    <navigator open-type="switchTab" url="/pages/home/home">跳转到页面3(home)</navigator>
+    <navigator open-type="switchTab" url="/pages/user/user">跳转到页面4(user)</navigator>
+</view>
 <view>
     <view>
         <view class='header'>
             <image src='/images/wx_login.png'></image>
         </view>
- 
+
         <view class='content'>
             <view>申请获取以下权限</view>
             <text>获得你的公开信息(昵称，头像等)</text>
         </view>
- 
+
         <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
             授权登录
         </button>
