@@ -2,6 +2,9 @@
   <navigator class="homepage" url="/pages/homepage/homepage">跳转到个人主页</navigator>
   <navigator class="login" url="/pages/login/login">跳转到登录界面</navigator>
 </view> -->
+  <navigator open-type="switchTab" url="/pages/home/home">跳转到页面3(home)</navigator>
+  <navigator open-type="switchTab" url="/pages/user/user">跳转到页面4(user)</navigator>
+</view>
 <view>
     <view>
         <view class='header'>

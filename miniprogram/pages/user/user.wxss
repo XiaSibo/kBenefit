@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  border: 1px solid red;
+}
+.comment {
+  position: fixed;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  right: 15rpx;
+  bottom: 15rpx;
+  border: 2px solid rgba(0, 0, 0, 0.4)
+}
+.comment image {
+  padding-left: 10rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.goTop {
+  position: fixed;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  left: 15rpx;
+  bottom: 15rpx;
+  border: 2px solid rgba(0, 0, 0, 0.4)
+}
+.goTop image {
+  padding-left: 25rpx;
+  padding-top: 23rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.detail {
+  position: fixed;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  left: 15rpx;
+  top: 20rpx;
+  border: 2px solid rgba(0, 0, 0, 0.4)
+}
+.detail image {
+  padding-left: 5rpx;
+  width: 100rpx;
+  height: 100rpx;
+}

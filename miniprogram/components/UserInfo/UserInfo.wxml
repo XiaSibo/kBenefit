@@ -1,0 +1,14 @@
+<view class="container">
+    <view class="pic">
+        <image src="{{userInfo.avatarUrl}}"/>
+    </view>
+    <view class="info">
+      <view>{{userInfo.name}}</view>
+      <view style="color:grey">{{userInfo.stuid}}</view>
+    </view>
+    <view class="tags">
+      <view class="tag" wx:for="{{tags}}" wx:key="index" style="background-color:{{item.color}}">
+        {{item.value}}
+      </view>
+    </view>
+</view>
