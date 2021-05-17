@@ -96,8 +96,11 @@
 }
 
 .title {
-  width: 100%;
+  width: 600rpx;
   height: fit-content;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .text {
@@ -112,7 +115,10 @@
 }
 
 .txt {
-  width: 78%;
+  width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .comment {

@@ -12,7 +12,7 @@ Page({
   },
 
   user_login: function () {
-    that = this;
+    var that = this;
     db.collection("user").where({
       stuid: this.data.id,
       password: this.data.password
@@ -34,8 +34,8 @@ Page({
               console.log(res.data)
             }
           })
-          wx.navigateTo({
-            url: '/pages/homepage/homepage',
+          wx.switchTab({
+            url: '/pages/home/home',
           })
         } else {
           wx.showToast({

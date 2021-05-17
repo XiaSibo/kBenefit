@@ -9,6 +9,8 @@
   width: 200rpx;
   height: 200rpx;
   margin: 10rpx auto;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
 }
 
 .container .pic image {
@@ -44,15 +46,18 @@
 
 .detail {
   position: absolute;
-  width: 112rpx;
-  height: 112rpx;
-  border-radius: 50%;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 10rpx;
   left: 15rpx;
   top: 20rpx;
-  border: 2px solid rgba(0, 0, 0, 0.4)
+  border: 1px solid rgba(0, 0, 0, 0.4)
 }
 .detail image {
-  padding-left: 5rpx;
+  padding-left: -5rpx;
   width: 100rpx;
   height: 100rpx;
+}
+.detail:hover {
+  background-color: gray;
 }
