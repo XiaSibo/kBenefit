@@ -15,7 +15,9 @@ App({
     }
 
     this.globalData = {
-      user: {}
+      user: {},
+      isAdministrator: false,
+      openid: ""
     }
   }
 })
