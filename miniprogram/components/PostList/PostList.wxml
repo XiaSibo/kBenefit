@@ -1,0 +1,52 @@
+{{type}}
+<view class="container">
+  <view class="post" wx:for="{{postList}}" wx:key="index">
+    <view class="box">
+      <view class="fromBox">
+      <view class="from">
+      from
+      </view>
+      <view class="ava">
+        <image src="{{item.avatarUrl}}"></image>
+      </view>
+      <view class="tags">
+        <view class="tag" wx:for="{{item.fromTags}}" wx:key="index" wx:if="{{index < 3}}" style="background-color:{{item.color}}">
+          {{item.value}}
+        </view>
+      </view>
+      </view>
+      <view class="toBox">
+      <view class="to">
+      to
+      </view>
+      <view class="tags">
+        <view class="tag" wx:for="{{item.toTags}}" wx:key="index" wx:if="{{index < 3}}" style="background-color:{{item.color}}">
+          {{item.value}}
+        </view>
+      </view>
+      <view class="date">
+        {{item.date}}
+      </view>
+      </view>
+    </view>
+    <view class="bottom">
+      <view class="title">
+        {{item.title}}
+      </view>
+      <view class="text">
+        <view class="txt">
+          {{item.text}}
+        </view>
+        <view class="comment">
+          <view class="pic">
+            <image src="/images/评论.png">
+            </image>
+          </view>
+        <view class="cnt">
+          {{item.commentCnt}}
+        </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

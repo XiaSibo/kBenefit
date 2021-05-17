@@ -1,16 +1,25 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/home/home",
+    "pages/user/user",
+    "pages/homepage/homepage",
+    "pages/login/login",
     "pages/admin/UserManage/index/index",
     "pages/admin/UserManage/add/add",
-    "pages/index/index",
-    "pages/homepage/homepage",
     "pages/admin/UserManage/modify/modify"
   ],
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
+  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发test",
+    "navigationBarTitleText": "千益",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
@@ -25,5 +34,22 @@
     "van-field": "@vant/weapp/field/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-tree-select": "@vant/weapp/tree-select/index"
-  }
+  },
+  "tabBar": {
+    "list": [
+      {
+      "pagePath": "pages/home/home",
+      "text": "首页",
+      "iconPath": "images/首页.png",
+      "selectedIconPath": "images/首页选中.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/我的.png",
+        "selectedIconPath": "images/我的选中.png"       
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
 }

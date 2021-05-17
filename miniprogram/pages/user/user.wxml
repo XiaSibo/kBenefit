@@ -1,0 +1,15 @@
+<UserInfo/>
+<van-tabs active="a">
+  <van-tab title="我的贴子" name="a">
+    <PostList type="my"/>
+  </van-tab>
+  <van-tab title="我的回复" name="b">
+    <PostList type="reply"/>
+  </van-tab>
+</van-tabs>
+<navigator class="comment" url="/pages/homepage/homepage">
+  <image src="/images/待评价.png"></image>
+</navigator>
+<view class="goTop" bindtap="goTop" open-type="switchTab">
+  <image src="/images/箭头 上.png"></image>
+</view>
