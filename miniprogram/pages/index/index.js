@@ -30,6 +30,7 @@ Page({
                                             // 获取到用户的 openid
                                             console.log("用户的openid:" + res.data.openid);
                                             openid = res.data.openid;
+                                            app.globalData.openid = res.data.openid;
                                         }
                                     });
                                 }
@@ -72,7 +73,7 @@ Page({
                     //如果不存在该openid对应用户，则跳转到登录页面检验身份
                     else {
                         wx.showToast({
-                            title: '您的微信账号尚未绑定',
+                            title: '账号未绑定',
                             icon: 'error',
                             duration: 2000
                           })

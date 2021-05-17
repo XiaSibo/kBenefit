@@ -12,6 +12,7 @@ Page({
   },
 
   user_login: function () {
+    that = this;
     db.collection("user").where({
       stuid: this.data.id,
       password: this.data.password
@@ -25,6 +26,14 @@ Page({
             duration: 2000
           })
           app.globalData.user = res.data;
+          db.collection("user").doc(app.globalData.user[0]._id).update({
+            data: {
+              _openid: app.globalData.openid
+            },
+            success: function (res) {
+              console.log(res.data)
+            }
+          })
           wx.navigateTo({
             url: '/pages/homepage/homepage',
           })
