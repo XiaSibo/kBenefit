@@ -1,0 +1,52 @@
+<view>
+    <van-icon name="back-top" class='goTop' hidden='{{!floorstatus}}' bind:tap="goTop"/>
+    <movable-area class="myArea">
+        <movable-view direction="all" x="10" y="390" class="kf_button">
+            <navigator url="/pages/admin/UserManage/add/add">
+                <van-icon name="add" size="90rpx" color="#ddd" />
+            </navigator>
+        </movable-view>
+    <van-search
+      value="{{ value }}"
+      placeholder="请输入搜索学工号关键词"
+      use-action-slot
+      bind:change="onChange"
+    >
+      <view slot="action" bind:tap="onClick">搜索</view>
+    </van-search>
+    <view class="userAdmin" wx:if="{{user}}">
+        <view class="userAdminHead">
+            <view class="userAdminHeadthOne">学工号</view>
+            <view class="userAdminHeadthOne">姓名</view>
+            <view class="userAdminHeadthTwo">操作</view>
+        </view>
+        <block wx:for="{{user}}" wx:key="{{}}">
+            <view class="userAdminBodyOne" wx:if="{{index%2==0}}">
+                <view class="UserAdminBodyID">{{item.stuid}}</view>
+                <view class="UserAdminBodyName">{{item.name}}</view>
+                <view class="UserOperate">
+                    <van-button class="myButton" round type="info" size="mini" type="primary" bindtap="onModify" data-id="{{item.stuid}}">修改</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="warning" bindtap="onDel" data-id="{{item._id}}">删除</van-button>
+                </view>
+            </view>
+            <view class="userAdminBodyTwo" wx:else>
+                <view class="UserAdminBodyID">{{item.stuid}}</view>
+                <view class="UserAdminBodyName">{{item.name}}</view>
+                <view class="UserOperate">
+                    <van-button class="myButton" round type="info" size="mini" type="primary" bind:tap="onModify" data-id="{{item.stuid}}">修改</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="warning" bind:tap="onDel" data-id="{{item._id}}">删除</van-button>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="none" wx:else>
+        <text>暂时没有用户！</text>
+    </view>
+    <van-tabbar class="myTabBar" active="{{ active }}" bind:change="onTabBarChange">
+        <van-tabbar-item icon="user-o" class="myTabBar">用户管理</van-tabbar-item>
+        <van-tabbar-item icon="label-o" class="myTabBar">标签管理</van-tabbar-item>
+        <van-tabbar-item icon="notes-o" class="myTabBar">帖子管理</van-tabbar-item>
+    </van-tabbar>
+</movable-area>
+</view>
+

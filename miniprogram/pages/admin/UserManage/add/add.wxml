@@ -1,0 +1,49 @@
+<view class="upUser">
+    <form bindsubmit="upUser">
+        <van-cell-group>
+            <van-field
+                value="{{ userid }}"
+                clearable
+                label="学工号"
+                placeholder="请输入学工号"
+                bind:change="onUserId"
+            />
+            <van-field
+                value="{{ username }}"
+                clearable
+                label="姓名"
+                placeholder="请输入姓名"
+                bind:change="onUserName"
+            />
+            <van-field
+             label="性别" 
+             value="{{usersex}}" 
+             is-link
+              bind:focus="alertMenu" 
+              placeholder="请选择性别"
+              bind:change="onUserSex"/>
+            <van-action-sheet show="{{show}}" actions="{{actions}}"
+            cancel-text="取消" bind:cancel="onCancel" bind:select="onSelect" round="false"/>
+            <van-field
+                value="{{ password }}"
+                type="password"
+                label="密码"
+                placeholder="请输入密码"
+                required
+                clearable
+                border="{{ false }}"
+                bind:change="onPassword"
+            />
+        </van-cell-group>
+        <van-tree-select 
+            class="userLabel"
+            items="{{ items }}"
+            main-active-index="{{ mainActiveIndex }}"
+            active-id="{{ activeId }}"
+            max="{{ max }}"
+            bind:click-nav="onClickNav"
+            bind:click-item="onClickItem"
+        />
+        <van-button icon="add-o" size="200px" type="primary" block class="addButton" formType="submit">新建用户</van-button>
+    </form>
+</view>
