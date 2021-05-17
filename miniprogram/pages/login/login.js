@@ -55,10 +55,9 @@ Page({
       success: function (res) {
         if (res.data.length != 0) {
           app.globalData.isAdministrator = true;
-          //跳转到管理员页面
-          // wx.navigateTo({
-          //   url: 'url',
-          // })
+          wx.navigateTo({
+            url: '/pages/admin/UserManage/index/index',
+          })
         } else {
           wx.showToast({
             title: '管理员秘钥错误',

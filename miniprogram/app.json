@@ -4,7 +4,10 @@
     "pages/home/home",
     "pages/user/user",
     "pages/homepage/homepage",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/admin/UserManage/index/index",
+    "pages/admin/UserManage/add/add",
+    "pages/admin/UserManage/modify/modify"
   ],
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
@@ -18,6 +21,19 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "千益",
     "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-tree-select": "@vant/weapp/tree-select/index"
   },
   "tabBar": {
     "list": [
