@@ -1,3 +1,5 @@
+<image class="pic" src="/images/background1.jpg" mode="aspectFill">
+</image>
 <PostList type="home"/>
 <navigator class="comment" url="/pages/homepage/homepage">
   <image src="/images/待评价.png"></image>

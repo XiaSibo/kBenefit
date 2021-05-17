@@ -20,8 +20,10 @@ Component({
       const DB = wx.cloud.database()
       const _ = DB.command
 
+      const app = getApp()
+
       DB.collection('user')
-      .doc('b00064a7609fdcc717b4ea851638fecb')  // 获得user 的 _id 进行更换
+      .doc(app.globalData.user[0]._id)  // 获得user 的 _id 进行更换
       .get({
         success: res => {
           if (res.data.avatarUrl == "")

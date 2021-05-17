@@ -1,3 +1,4 @@
+<image class="pic" src="/images/background1.jpg" mode="aspectFill"></image>
 <UserInfo/>
 <van-tabs active="a">
   <van-tab title="我的贴子" name="a">
