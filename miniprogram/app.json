@@ -1,20 +1,16 @@
 {
   "pages": [
+    "pages/admin/UserManage/index/index",
     "pages/index/index",
     "pages/home/home",
     "pages/user/user",
     "pages/homepage/homepage",
     "pages/login/login",
-    "pages/admin/UserManage/index/index",
     "pages/admin/UserManage/add/add",
-    "pages/admin/UserManage/modify/modify"
+    "pages/admin/UserManage/modify/modify",
+    "pages/admin/PostManage/index/index",
+    "pages/admin/TagManage/index/index"
   ],
-  "usingComponents": {
-    "van-button": "@vant/weapp/button/index",
-    "van-image": "@vant/weapp/image/index",
-    "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index"
-  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
@@ -22,9 +18,11 @@
     "navigationBarTitleText": "千益",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
     "van-row": "@vant/weapp/row/index",
     "van-col": "@vant/weapp/col/index",
     "van-search": "@vant/weapp/search/index",
@@ -38,16 +36,16 @@
   "tabBar": {
     "list": [
       {
-      "pagePath": "pages/home/home",
-      "text": "首页",
-      "iconPath": "images/首页.png",
-      "selectedIconPath": "images/首页选中.png"
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/首页.png",
+        "selectedIconPath": "images/首页选中.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
         "iconPath": "images/我的.png",
-        "selectedIconPath": "images/我的选中.png"       
+        "selectedIconPath": "images/我的选中.png"
       }
     ]
   },

@@ -1,6 +1,64 @@
-<!--miniprogram/pages/admin/UserManage/modify/modify.wxml-->
-<view class='suggest_title'>请输入你想反馈的问题</view>
-  <view class='suggest_box'>
-    <textarea class='suggest_text' bindinput="bindText" maxlength='200' placeholder='我们有什么地方让您不满意，请输入您的反馈意见' placeholder-class='sug_p'></textarea>
-    <text>{{t_length}}/200</text> 
-  </view>
+<view class="upUser">
+    <form bindsubmit="modifyUser">
+        <view style="text-align: center;">
+          <van-image width="100" height="100" src="{{avatarUrl}}" />
+        </view>
+        <view style="text-align: center;margin-bottom:10%;">
+          <van-button size="small" type="primary" bind:click="refreshAva">恢复默认头像</van-button>
+        </view>
+        <van-cell-group>
+            <van-field
+                value="{{ userid }}"
+                clearable
+                label="学工号"
+                placeholder="请输入学工号"
+                bind:change="onUserId"
+            />
+            <van-field
+                value="{{ username }}"
+                clearable
+                label="姓名"
+                placeholder="请输入姓名"
+                bind:change="onUserName"
+            />
+            <van-field
+             label="性别" 
+             value="{{usersex}}" 
+             is-link
+              bind:focus="alertMenu" 
+              placeholder="请选择性别"
+              bind:change="onUserSex"/>
+            <van-action-sheet show="{{show}}" actions="{{actions}}"
+            cancel-text="取消" bind:cancel="onCancel" bind:select="onSelect" round="false"/>
+            <van-field
+                value="{{ password }}"
+                type="password"
+                label="密码"
+                placeholder="请输入密码"
+                required
+                clearable
+                border="{{ false }}"
+                bind:change="onPassword"
+            />
+            <van-field
+                value="{{ userinfo }}"
+                clearable
+                type="textarea"
+                autosize="true"
+                label="简介"
+                placeholder="请输入简介"
+                bind:change="onUserInfo"
+            />
+        </van-cell-group>
+        <van-tree-select 
+            class="userLabel"
+            items="{{ items }}"
+            main-active-index="{{ mainActiveIndex }}"
+            active-id="{{ activeId }}"
+            max="{{ max }}"
+            bind:click-nav="onClickNav"
+            bind:click-item="onClickItem"
+        />
+        <van-button icon="add-o" size="200px" type="primary" block class="addButton" formType="submit">b确认修改</van-button>
+    </form>
+</view>

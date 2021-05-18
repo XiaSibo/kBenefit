@@ -1,4 +1,3 @@
-// pages/index/index.js
 Page({
   /**
  * 页面的初始数据
@@ -52,7 +51,19 @@ Page({
     });
   },
   onTabBarChange(event) {
-    this.setData({ active: event.detail });
+    this.setData({
+       active: event.detail 
+      });
+    if(this.data.active==1) {
+      wx.navigateTo({
+        url: '/pages/admin/TagManage/index/index',
+        })
+    }
+    if(this.data.active==2) {
+      wx.navigateTo({
+        url: '/pages/admin/PostManage/index/index',
+        })
+    }
   },
   /**
  * 生命周期函数--监听页面加载
@@ -83,8 +94,9 @@ goTop: function (e) {  // 一键回到顶部
   }
 },
 onModify: function(e) {
+  console.log(e.currentTarget.dataset.id)
   wx.navigateTo({
-    url: '/pages/admin/UserManage/modify/modify',
+    url: '/pages/admin/UserManage/modify/modify?id=' + e.currentTarget.dataset.id,
     })
 },
 onLoad: function onLoad(options) {
@@ -129,8 +141,6 @@ onDel: function onDel(e) {
     
   },
   changeData:function(){
-
-    this.onLoad();//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
-    
+    this.onLoad();
     }
 });
