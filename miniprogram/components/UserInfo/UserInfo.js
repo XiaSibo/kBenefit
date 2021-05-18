@@ -20,6 +20,8 @@ Component({
       const DB = wx.cloud.database()
       const _ = DB.command
 
+      const app = getApp()
+
       DB.collection('user')
       .doc(app.globalData.user[0]._id)  // 获得user 的 _id 进行更换
       .get({

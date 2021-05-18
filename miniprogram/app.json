@@ -31,7 +31,10 @@
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-field": "@vant/weapp/field/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
-    "van-tree-select": "@vant/weapp/tree-select/index"
+    "van-tree-select": "@vant/weapp/tree-select/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
   },
   "tabBar": {
     "list": [

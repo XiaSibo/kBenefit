@@ -1,9 +1,10 @@
-<UserInfo/>
+<image class="pic" src="/images/background1.jpg" mode="aspectFill"></image>
+<UserInfo wx:if="{{show_info}}"/>
 <van-tabs active="a">
-  <van-tab title="我的贴子" name="a">
+  <van-tab title="我的贴子" name="a" wx:if="{{show_info}}">
     <PostList type="my"/>
   </van-tab>
-  <van-tab title="我的回复" name="b">
+  <van-tab title="我的回复" name="b" wx:if="{{show_info}}">
     <PostList type="reply"/>
   </van-tab>
 </van-tabs>
