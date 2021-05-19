@@ -5,7 +5,7 @@
     <PostList type="my"/>
   </van-tab>
   <van-tab title="我的回复" name="b" wx:if="{{show_info}}">
-    <PostList type="reply"/>
+    <ResponseList />
   </van-tab>
 </van-tabs>
 <navigator class="comment" url="/pages/homepage/homepage">
