@@ -90,6 +90,10 @@
   z-index: 500;
 }
 
+.space{
+  height:120rpx;
+}
+
 
 .goTop{
   height: 80rpx;

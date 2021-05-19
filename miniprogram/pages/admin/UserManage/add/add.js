@@ -20,6 +20,7 @@ Page({
     userid:'',
     username:'',
     password:'',
+    existedUserid:[],
   },
   alertMenu() {
     this.setData({show :true});
@@ -80,30 +81,79 @@ Page({
     console.log(this.data.password);
     console.log(this.data.activeId);
     const db = wx.cloud.database();
-    db.collection("user").add({
-      data: {
-        _openid:"",
-        avatarUrl:"",
-        gender:this.data.usersex,
-        info:"",
-        name:this.data.username,
-        password:this.data.password,
-        stuid:this.data.userid,
-        tags:this.data.activeId
-      },
-      success: function success(res) {
-        wx.showToast({
-          title:"新增记录成功",
-        }),
-        that.changeParentData();
-      },
-      fail: function fail(err) {
-        wx.showToast({
-            icon: "none",
-            title: "新增记录失败"
-        });
-      }
-    })
+    if(this.data.userid==''){
+      wx.showToast({
+        icon: "none",
+        title: "学工号不能为空"
+      });
+    } 
+    else if(this.data.username==''){
+      wx.showToast({
+        icon: "none",
+        title: "姓名不能为空"
+      });
+    }
+    else if(this.data.usersex==''){
+      wx.showToast({
+        icon: "none",
+        title: "性别不能为空"
+      });
+    }
+    else if(this.data.password==''){
+      wx.showToast({
+        icon: "none",
+        title: "密码不能为空"
+      });
+    }
+    else {
+      db.collection("user").where({
+        stuid : this.data.userid 
+      }).get({
+        success: function success(res) {
+            if(res.data.length==0) {
+              db.collection("user").add({
+                data: {
+                  _openid:"",
+                  avatarUrl:"",
+                  gender:that.data.usersex,
+                  info:"",
+                  name:that.data.username,
+                  password:that.data.password,
+                  stuid:that.data.userid,
+                  tags:that.data.activeId
+                },
+                success: function success(res) {
+                  wx.showToast({
+                    title:"新增记录成功",
+                    mask:true
+                  }),
+                  setTimeout(function() {
+                    that.changeParentData();
+                  }, 1000);
+                },
+                fail: function fail(err) {
+                  wx.showToast({
+                      icon: "none",
+                      title: "新增记录失败"
+                  });
+                }
+              })
+            }
+            else {
+              wx.showToast({
+                icon:"none",
+                title:"学工号已存在"
+              })
+            }
+        },
+        fail: function fail(err) {
+            wx.showToast({
+                icon: "none",
+                title: "查询记录失败"
+            });
+        }
+      })
+    }
   },
   changeParentData: function () {
 
@@ -111,6 +161,9 @@ Page({
     if (pages.length > 1) {
       var beforePage = pages[pages.length- 2];//获取上一个页面实例对象
       beforePage.changeData();//触发父页面中的方法
+      wx.navigateTo({
+        url: '/pages/admin/UserManage/index/index',
+      })
       }
     },
     

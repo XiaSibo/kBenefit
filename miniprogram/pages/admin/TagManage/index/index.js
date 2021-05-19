@@ -1,66 +1,91 @@
-// miniprogram/pages/admin/tagManage/index/index.js
 Page({
-
   /**
-   * 页面的初始数据
-   */
+ * 页面的初始数据
+ */
   data: {
-
+      active: 1,
+      value:'',
+      tagKeys:[],
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onTabBarChange(event) {
+    this.setData({
+       active: event.detail 
+      });
+    if(this.data.active==0) {
+      wx.navigateTo({
+        url: '/pages/admin/UserManage/index/index',
+        })
+    }
+    if(this.data.active==2) {
+      wx.navigateTo({
+        url: '/pages/admin/PostManage/index/index',
+        })
+    }
   },
-
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+ * 生命周期函数--监听页面加载
+ */
+onPageScroll: function (e) {
+  if (e.scrollTop > 100) {
+    this.setData({
+      floorstatus: true
+    });
+  } else {
+    this.setData({
+      floorstatus: false
+    });
   }
-})
+},
+
+//回到顶部
+goTop: function (e) {  // 一键回到顶部
+  if (wx.pageScrollTo) {
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
+  } else {
+    wx.showModal({
+      title: '提示',
+      content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+    })
+  }
+},
+onModify: function(e) {
+  console.log(e.currentTarget.dataset.id)
+  wx.navigateTo({
+    url: '/pages/admin/TagManage/ValueIndex/ValueIndex?id=' + e.currentTarget.dataset.id,
+    })
+},
+onModifyKeys: function(e) {
+  console.log(e.currentTarget.dataset.id)
+  wx.navigateTo({
+    url: '/pages/admin/TagManage/ModifyKeys/ModifyKeys?id=' + e.currentTarget.dataset.id,
+    })
+},
+onLoad: function onLoad(options) {
+  var _this = this;
+  var db = wx.cloud.database();
+  db.collection("tag_class").get({
+      success: function success(res) {
+          _this.setData({
+              tagKeys: res.data,
+          });
+      },
+      fail: function fail(err) {
+          wx.showToast({
+              icon: "none",
+              title: "查询记录失败"
+          });
+      }
+  });
+},
+onDel: function onDel(e) {
+  console.log("11111111111")
+},
+  onUpdate: function onUpdate(e) {
+    
+  },
+  changeData:function(){
+    this.onLoad();
+    }
+});
