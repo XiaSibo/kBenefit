@@ -1,0 +1,40 @@
+<view>
+    <van-icon name="back-top" class='goTop' hidden='{{!floorstatus}}' bind:tap="goTop"/>
+    <movable-area class="myArea">
+        <van-icon name="add" size="90rpx" color="#ddd" class="goAdd" bind:tap="goAdd"/>
+        <view class="userAdmin" wx:if="{{tagValues}}">
+        <view class="userAdminHead">
+            <view class="userAdminHeadthOne">标签值</view>
+            <view class="userAdminHeadthOne">标签颜色</view>
+            <view class="userAdminHeadthTwo">操作</view>
+        </view>
+        <block wx:for="{{tagValues}}" wx:key="{{}}">
+            <view class="userAdminBodyOne" wx:if="{{index%2==0}}">
+                <view class="UserAdminBodyID">{{item.value}}</view>
+                <view class="UserAdminBodyName">{{item.color}}</view>
+                <view class="UserOperate">
+                    <van-button class="myButton" round type="info" size="mini" type="primary" bind:tap="onModify" data-id="{{item.tag_id}}">修改</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="warning" bind:tap="onDel" data-id="{{item.tag_id}}">删除</van-button>
+                </view>
+            </view>
+            <view class="userAdminBodyTwo" wx:else>
+                <view class="UserAdminBodyID">{{item.value}}</view>
+                <view class="UserAdminBodyName">{{item.color}}</view>
+                <view class="UserOperate">
+                    <van-button class="myButton" round type="info" size="mini" type="primary" bind:tap="onModify" data-id="{{item.tag_id}}">修改</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="warning" bind:tap="onDel" data-id="{{item.tag_id}}">删除</van-button>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="none" wx:else>
+        <text>暂时没有标签值！</text>
+    </view> 
+    <view class="space"></view>
+    <van-tabbar class="myTabBar" active="{{ active }}" bind:change="onTabBarChange">
+        <van-tabbar-item icon="user-o" class="myTabBar">用户管理</van-tabbar-item>
+        <van-tabbar-item icon="label-o" class="myTabBar">标签管理</van-tabbar-item>
+        <van-tabbar-item icon="notes-o" class="myTabBar">帖子管理</van-tabbar-item>
+    </van-tabbar>
+  </movable-area>
+</view>

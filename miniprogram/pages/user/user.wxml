@@ -1,0 +1,13 @@
+<image class="pic" src="/images/background1.jpg" mode="aspectFill" style="z-index:-3;"></image>
+<UserInfo wx:if="{{show_info}}"/>
+<van-tabs active="a">
+  <van-tab title="我的贴子" name="a" wx:if="{{show_info}}">
+    <PostList type="my"/>
+  </van-tab>
+  <van-tab title="我的回复" name="b" wx:if="{{show_info}}">
+    <ResponseList />
+  </van-tab>
+</van-tabs>
+<navigator class="comment" url="/pages/postcreating/postcreating">
+  <image src="/images/待评价.png"></image>
+</navigator>

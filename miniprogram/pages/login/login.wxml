@@ -1,0 +1,27 @@
+<view class="login-container">
+  <view style="text-align: center;">
+    <van-image class="propaganda_img" width="15rem" height="10rem" fit="contain"
+      src="https://img.yzcdn.cn/vant/cat.jpeg" />
+  </view>
+  <view class="title">Kbenefit</view>
+  <view class="login-box">
+    <van-tabs active="a">
+      <van-tab title="用户登录" name="a">
+        <label>用户名</label>
+        <input class="input" placeholder="请输入用户名" model:value="{{id}}"/>
+        <label>密码</label>
+        <input class="input" placeholder="请输入密码" model:value="{{password}}"/>
+        <view style="text-align: center;">
+          <van-button calss="login_btn" type="primary" bind:click="user_login">立即登录</van-button>
+        </view>
+      </van-tab>
+      <van-tab title="管理员登录" name="b">
+        <label>管理员秘钥</label>
+        <input class="input" placeholder="请输入管理员秘钥" model:value="{{administrator_password}}"/>
+        <view style="text-align: center">
+          <van-button calss="login_btn" type="primary" bind:click="administrator_login">立即登录</van-button>
+        </view>
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>

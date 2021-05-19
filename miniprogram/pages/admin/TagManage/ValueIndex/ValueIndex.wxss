@@ -1,0 +1,118 @@
+.userAdmin {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.userAdminHead {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 60rpx;
+  align-items: center;
+}
+
+.userAdminHeadthOne {
+  width: 60%;
+  justify-content: center;
+  background: #2d8cf0;
+  color: #fff;
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+  font-size: 35rpx;
+  margin-left: 5rpx;
+  margin-right: 5rpx;
+}
+
+.userAdminHeadthTwo {
+  width: 100%;
+  justify-content: center;
+  background: #2d8cf0;
+  color: #fff;
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+  font-size: 35rpx;
+  margin-left: 5rpx;
+  margin-right: 5rpx;
+}
+
+.userAdminBodyOne {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  height: 130rpx;
+  align-items: center;
+}
+
+.userAdminBodyTwo {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  height: 130rpx;
+  align-items: center;
+  background: #E6F3F9;
+}
+
+.UserAdminBodyID {
+  justify-content: center;
+  text-align: center;
+  font-size: 30rpx;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  width: 28%;
+}
+
+.UserAdminBodyName {
+  justify-content: center;
+  text-align: center;
+  font-size: 30rpx;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  width: 28%;
+}
+
+.UserOperate {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.myButton {
+  margin:10rpx;
+  z-index: 100;
+}
+
+.myTabBar{
+  z-index: 500;
+}
+
+.goAdd{
+  height: 80rpx;
+  width: 80rpx;
+  background:rgb(240,240,240);
+  position: fixed;
+  bottom: 100rpx;
+  right: 30rpx;
+  border-radius: 50%;
+  z-index:500;
+}
+
+.goTop{
+  height: 80rpx;
+  width: 80rpx;
+  background:rgb(240,240,240);
+  position: fixed;
+  bottom: 100rpx;
+  left: 30rpx;
+  border-radius: 50%;
+  z-index:500;
+}
+.myArea {
+  width:100%;
+}
+.space{
+  height:120rpx;
+}

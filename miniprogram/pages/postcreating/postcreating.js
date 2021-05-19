@@ -289,9 +289,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({
-    //   u_id: 
-    // });
+    this.setData({
+      u_id: app.globalData.user[0]._id,
+    });
     const db = wx.cloud.database();
     const _ = db.command;
     var tags = [];

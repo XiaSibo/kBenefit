@@ -1,22 +1,45 @@
 {
   "pages": [
+    "pages/admin/UserManage/index/index",
+    "pages/home/home",
+    "pages/user/user",
+    "pages/login/login",
+    "pages/homepage/homepage",
+    "pages/admin/UserManage/add/add",
+    "pages/admin/UserManage/modify/modify",
+    "pages/admin/PostManage/index/index",
+    "pages/admin/TagManage/index/index",
+    "pages/admin/TagManage/AddKeys/AddKeys",
+    "pages/admin/TagManage/ValueIndex/ValueIndex",
+    "pages/admin/TagManage/AddValues/AddValues",
+    "pages/admin/TagManage/ModifyKeys/ModifyKeys",
+    "pages/admin/TagManage/ModifyValues/ModifyValues",
     "pages/postcreating/postcreating",
-    "pages/postdetail/postdetail",
-    "pages/index/index",
-    "pages/homepage/homepage"
-    
+    "pages/postdetail/postdetail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发test",
+    "navigationBarTitleText": "千益",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
+
   "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
     "van-image": "@vant/weapp/image/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-search": "@vant/weapp/search/index",
     "van-icon": "@vant/weapp/icon/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-tree-select": "@vant/weapp/tree-select/index",
+    "color-picker": "/components/color-picker/color-picker",
     "van-popup": "@vant/weapp/popup/index",
     "van-field": "@vant/weapp/field/index",
     "van-uploader": "@vant/weapp/uploader/index",
@@ -24,9 +47,23 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-picker": "@vant/weapp/picker/index",
     "van-tag": "@vant/weapp/tag/index",
-    "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index",
-    "van-toast": "@vant/weapp/toast/index",
-    "van-button": "@vant/weapp/button/index"
-  }
+    "van-toast": "@vant/weapp/toast/index"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/首页.png",
+        "selectedIconPath": "images/首页选中.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/我的.png",
+        "selectedIconPath": "images/我的选中.png"
+      }
+    ]
+  },
+  "enablePullDownRefresh": true
 }

@@ -1,18 +1,31 @@
 <view class="container">
 
   <view class="info-box">
+    <view style="text-align: center;">
+      <van-image width="100" height="100" src="{{userInfo.avatarUrl}}" />
+    </view>
     <view style="text-align: center;margin-bottom:10%;">
-      <image class="avatar-img" src="" />
+      <van-button size="small" type="primary" bind:click="change_avatar">更换头像</van-button>
     </view>
 
-    <text>学工号： {{ID}}</text>
-    <text>姓名： {{name}}</text>
-    <text>性别： {{gender}}</text>
-    <text>标签： {{label}}</text>
-    <text>简介： {{Introduction}}</text>
 
-    <view style="margin-top:20%">
-      <button bindtap="change_introduction">编辑简介</button>
+    <text>学工号： {{userInfo.stuid}}</text>
+    <text>姓名： {{userInfo.name}}</text>
+    <text>性别： {{userInfo.gender}}</text>
+    <view class="tags">
+      <text>标签：</text>
+      <view class="tag" wx:for="{{tags}}" wx:key="index">
+        {{item.value}}
+      </view>
+    </view>
+    <text>简介： {{userInfo.info}}</text>
+
+    <view style="text-align: center;">
+      <van-button size="small" type="primary" bind:click="change_info">编辑简介</van-button>
+    </view>
+    <view style="text-align: center;" hidden="{{isHidden}}">
+      <textarea class="textarea" placeholder="点击编辑个人简介" model:value="{{info}}"/>
+      <van-button size="small" type="primary" bind:click="change_info_confirm">确认</van-button>
     </view>
   </view>
 </view>

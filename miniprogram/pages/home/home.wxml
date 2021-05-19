@@ -1,0 +1,8 @@
+<view class="container">
+  <image class="pic" src="/images/background1.jpg" mode="aspectFill" style="z-index:-3;">
+  </image>
+  <PostList type="home" wx:if="{{show}}"/>
+  <navigator class="comment" url="/pages/postcreating/postcreating">
+    <image src="/images/待评价.png"></image>
+  </navigator>
+</view>

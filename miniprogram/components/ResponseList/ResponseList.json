@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "swipe-refresh-layout": "/components/swiperefreshlayout/swiperefreshlayout"
+  }
+}
