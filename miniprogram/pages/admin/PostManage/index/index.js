@@ -19,12 +19,12 @@ Page({
        active: event.detail 
       });
     if(this.data.active==0) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/admin/UserManage/index/index',
         })
     }
     if(this.data.active==1) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/admin/TagManage/index/index',
         })
     }

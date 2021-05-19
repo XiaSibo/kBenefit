@@ -1,10 +1,16 @@
 {
   "pages": [
-    "pages/admin/UserManage/index/index",
-    "pages/home/home",
+    
+    "pages/index/index",
     "pages/user/user",
     "pages/login/login",
     "pages/homepage/homepage",
+    "pages/home/home",
+    
+    "pages/admin/UserManage/index/index",
+    
+    
+    
     "pages/admin/UserManage/add/add",
     "pages/admin/UserManage/modify/modify",
     "pages/admin/PostManage/index/index",

@@ -12,12 +12,12 @@ Page({
        active: event.detail 
       });
     if(this.data.active==0) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/admin/UserManage/index/index',
         })
     }
     if(this.data.active==2) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/admin/PostManage/index/index',
         })
     }
