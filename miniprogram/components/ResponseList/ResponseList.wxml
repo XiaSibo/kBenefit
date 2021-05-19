@@ -6,7 +6,7 @@
       <view class="reply" wx:for='{{list}}' wx:key="index">
         <view class="content">
           <text>
-            回复：{{item.content}}
+            回复：{{item.content}}  贴子id(供展示)：{{item.post_id}}
           </text>
         </view>
         <view class="title">

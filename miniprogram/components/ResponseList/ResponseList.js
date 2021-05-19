@@ -1,4 +1,7 @@
 // components/ResponseList/ResponseList.js
+const app = getApp()
+const db = wx.cloud.database()
+const _ = db.command
 Component({
   /**
    * 组件的属性列表
@@ -11,58 +14,12 @@ Component({
    * 组件的初始数据
    */
   data: {
-    rawList: [
-      {
-        content: '回复111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
-        title: '帖子1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
-      },
-      {
-        content: '回复2',
-        title: '帖子2',
-      },
-      {
-        content: '回复3',
-        title: '帖子3',
-      },
-      {
-        content: '回复4',
-        title: '帖子4',
-      },
-      {
-        content: '回复5',
-        title: '帖子5',
-      },
-      {
-        content: '回复6',
-        title: '帖子6',
-      },
-      {
-        content: '回复7',
-        title: '帖子7',
-      },
-      {
-        content: '回复7',
-        title: '帖子7',
-      },
-      {
-        content: '回复8',
-        title: '帖子8',
-      },
-      {
-        content: '回复9',
-        title: '帖子9',
-      },
-      {
-        content: '回复10',
-        title: '帖子10',
-      },
-    ],
     list: [],  // object: {content, title, post_id}
     page: 1,
     pageSize: 6,
     isRequesting: false, // 是否正在请求数据，防止数据的重复加载
     hasMore: true, // 是否还有更多数据
-    isEmpty: false // 是否为空数据
+    isEmpty: false, // 是否为空数据
   },
 
   lifetimes: {
@@ -111,8 +68,7 @@ Component({
       /**
      * 获取数据
      */
-    getData: function() {
-      setTimeout(() => {
+    getData: async function() {
         if (this.data.page == 1) {
           this.setData({
             list: [],
@@ -120,7 +76,6 @@ Component({
         }
         // skip: this.data.list.length, limit: pageSize
         /* 
-          TODO:
             1. 编写云函数，取得数据库中的真实数据
                 -传入参数: skip: this.data.list.length, limit: pageSize
                 -返回对象数组: [{post_id, content, title}, ...]
@@ -130,15 +85,34 @@ Component({
             2. .then, 拿到append_data,接下来setData。
             3. 设置页面跳转（post_id）
         */
-        var append_data = this.data.rawList.slice(this.data.list.length, this.data.list.length + this.data.pageSize)
+        var responseList = []
+        var responses = []
+        await db.collection('user').doc(app.globalData.user[0]._id).get().then(res => {
+          responses = res.data.responses
+        })
+        await db.collection('response').where({
+          _id: _.in(responses)
+        }).skip(this.data.list.length).limit(this.data.pageSize).get()
+        .then(res => {
+          for (var i = 0; i < res.data.length; i ++) {
+            responseList.push({
+              post_id: res.data[i].post_id,
+              content: res.data[i].content,
+              title: "title"
+            })
+          }
+        })
+        for (var i = 0; i < responseList.length; i ++) {
+          await db.collection('post').doc(responseList[i].post_id).get().then(res => {
+            responseList[i].title = res.data.title
+          })
+        }
         this.setData({
-          list: this.data.list.concat(append_data),
+          list: this.data.list.concat(responseList),
           isRequesting: false,
-          hasMore: append_data.length == this.data.pageSize
+          hasMore: responseList.length == this.data.pageSize
         })
         this.swipeRefresh.setRefresh(false)
-      }, 500);
-      console.log("getdata ing...")
     }
   },
 })

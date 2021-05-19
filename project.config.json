@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
+  "cloudbaseRoot": "cloudbase/",
   "setting": {
     "urlCheck": false,
     "es6": true,
@@ -45,6 +45,7 @@
   "appid": "wxc600d77995af3766",
   "projectname": "kBenefit",
   "libVersion": "2.17.0",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "list": []
