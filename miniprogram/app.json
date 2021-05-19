@@ -10,15 +10,12 @@
     "pages/admin/UserManage/modify/modify",
     "pages/admin/PostManage/index/index",
     "pages/admin/TagManage/index/index",
-<<<<<<< HEAD
     "pages/admin/TagManage/AddKeys/AddKeys",
     "pages/admin/TagManage/ValueIndex/ValueIndex",
     "pages/admin/TagManage/AddValues/AddValues",
     "pages/admin/TagManage/ModifyKeys/ModifyKeys",
-    "pages/admin/TagManage/ModifyValues/ModifyValues"
-=======
+    "pages/admin/TagManage/ModifyValues/ModifyValues",
     "pages/postcreating/postcreating"
->>>>>>> df3323eecddd080144778a699d943cde90983d70
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -40,9 +37,7 @@
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-tree-select": "@vant/weapp/tree-select/index",
-<<<<<<< HEAD
-    "color-picker": "/components/color-picker/color-picker"
-=======
+    "color-picker": "/components/color-picker/color-picker",
     "van-popup": "@vant/weapp/popup/index",
     "van-field": "@vant/weapp/field/index",
     "van-uploader": "@vant/weapp/uploader/index",
@@ -51,7 +46,6 @@
     "van-picker": "@vant/weapp/picker/index",
     "van-tag": "@vant/weapp/tag/index",
     "van-toast": "@vant/weapp/toast/index"
->>>>>>> df3323eecddd080144778a699d943cde90983d70
   },
   "tabBar": {
     "list": [
