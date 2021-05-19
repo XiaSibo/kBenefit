@@ -1,0 +1,126 @@
+<!--miniprogram/pages/postcreating/postcreating.wxml-->
+<view class="container">
+  <van-cell-group>
+    <van-field
+      model:value="{{ title }}"
+      placeholder="输入标题"
+      label="标题"
+      bind:change="onTitleChange"
+      maxlength="30"
+      show-word-limit="true"
+      clearable="true"
+      required
+      title-width="100rpx"
+    />
+    <van-field
+      model:value="{{ content }}"
+      placeholder="输入正文"
+      label="正文"
+      type="textarea"
+      autosize="true"
+      bind:change="onContentChange"
+      maxlength="1000"
+      show-word-limit="true"
+      clearable="true"
+      required
+      title-width="100rpx"
+    />
+    <van-cell title="上传图片" value="最多9张" />
+    <view class="image_picker">
+      <van-uploader 
+        file-list="{{ fileList }}"
+        bind:after-read="afterRead"
+        bind:delete="deleteImg"
+        accept="image"
+        deletable
+        preview-full-image
+        multiple
+        max-count="9"
+      />
+    </view>
+    <van-cell title="接收者标签：" clickable bind:click="showTagHelp" border="{{false}}">
+      <van-icon slot="right-icon" name="question-o" class="custom-icon" size="50rpx"/>
+    </van-cell>
+    <view class="tag_display">
+      <view wx:for="{{tags}}" wx:key="index" wx:for-index="tag_key_idx" style="display: inline" >
+        <view class="each_tag" wx:for="{{item.group}}" wx:key="index" wx:for-index="tag_value_idx" wx:for-item="each_tag" wx:if="{{each_tag.show}}" >
+          <van-tag 
+            size="medium"
+            round 
+            closeable
+            data-keyidx="{{tag_key_idx}}"
+            data-valueidx="{{tag_value_idx}}"
+            color="{{each_tag.color}}"
+            bind:close="onTagClose"
+          >
+            {{each_tag.value}}
+          </van-tag>
+        </view>
+      </view>
+      <van-tag 
+        wx:if="{{ no_limit }}"
+        color="white"
+        text-color="#aaa"
+        size="large"
+        round 
+        id="no_limit"
+      >
+        不限
+      </van-tag>
+      <view class="adder_container" >
+        <view class="tag_adder" hover-class="hover_adder" hover-stay-time="100" bindtap="showAdder">
+          <van-icon name="plus" size="40rpx" />
+        </view>
+      </view>
+    </view>
+  </van-cell-group>
+  <view class="submit_container">
+    <van-button type="info" round block disabled="{{can_not_submit}}" bind:click="uploadToCloud">发布</van-button>
+  </view>
+</view>
+
+<!-- pop-ups -->
+<van-popup
+  show="{{ show_adder }}"
+  position="bottom"
+  custom-style="height: 70%"
+  bind:close="onAdderClose"
+>
+  <van-tabs active="{{ tag_key_active }}" bind:change="onTagKeyShift" animated>
+    <van-tab wx:for="{{ tags }}" wx:key="index" title="{{item.key}}">
+      <van-picker 
+        columns="{{ item.value_group }}" 
+        bind:confirm="onTagValueSelect" 
+        show-toolbar
+        cancel-button-text=""
+        confirm-button-text="确认添加"
+      />
+    </van-tab>
+  </van-tabs>
+</van-popup>
+
+<van-popup show="{{ show_helper }}" bind:close="onHelperClose">
+  <view class="helper">
+    <view>
+      设置接收者标签有助于你的话题被推送给你选择的受众人群。
+    </view>
+    <view>
+      筛选规则：
+    </view>
+    <view>
+      不同类别的标签间为“且”关系；
+    </view>
+    <view>
+      同一类别的不同标签间为“或”关系；
+    </view>
+    <view>
+      未被设置的标签类，默认为“不限”。
+    </view>
+    <view>
+      例如：
+    </view>
+    <view>
+      用户选择了类别“学院”下的标签“数学学院”，以及类别“职业”下的两个标签“研究生”和“教师”，则筛选出的受众为：拥有“数学学院”标签、并且拥有“研究生”“教师”之中至少一枚标签的用户。
+    </view>
+  </view>
+</van-popup>

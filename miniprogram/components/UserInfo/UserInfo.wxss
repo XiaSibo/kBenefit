@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  top: 0rpx;
   width: 100%;
   height: fit-content;
   background-color:rgb(226, 226, 226, 0.3);
@@ -31,7 +32,7 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin-left: 33%;
   width: 380rpx;
   height: fit-content;
 }

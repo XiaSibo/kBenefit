@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "UserInfo": "/components/UserInfo/UserInfo",
-    "PostList": "/components/PostList/PostList"
+    "PostList": "/components/PostList/PostList",
+    "ResponseList": "/components/ResponseList/ResponseList"
   }
 }
