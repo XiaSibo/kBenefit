@@ -1,11 +1,9 @@
 <view>
     <van-icon name="back-top" class='goTop' hidden='{{!floorstatus}}' bind:tap="goTop"/>
     <movable-area class="myArea">
-        <movable-view direction="all" x="10" y="390" class="kf_button">
-            <navigator url="/pages/admin/UserManage/add/add">
-                <van-icon name="add" size="90rpx" color="#ddd" />
-            </navigator>
-        </movable-view>
+        <navigator url="/pages/admin/UserManage/add/add">
+            <van-icon name="add" size="90rpx" color="#ddd" class='goAdd' />
+        </navigator>
     <van-search
       value="{{ value }}"
       placeholder="请输入搜索学工号关键词"
@@ -42,6 +40,7 @@
     <view class="none" wx:else>
         <text>暂时没有用户！</text>
     </view>
+    <view class="space"></view>
     <van-tabbar class="myTabBar" active="{{ active }}" bind:change="onTabBarChange">
         <van-tabbar-item icon="user-o" class="myTabBar">用户管理</van-tabbar-item>
         <van-tabbar-item icon="label-o" class="myTabBar">标签管理</van-tabbar-item>

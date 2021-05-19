@@ -2,8 +2,9 @@
 Page({
   data: {
       active: 2,
-      post: [],
+      posts: [],
       value:'',
+      who:[],
   },
   onChange(e) {
     this.setData({
@@ -60,11 +61,39 @@ goTop: function (e) {  // 一键回到顶部
 onLoad: function onLoad(options) {
   var _this = this;
   var db = wx.cloud.database();
+  var postsTemp = new Array();
   db.collection("post").get({
       success: function success(res) {
-          _this.setData({
-              post: res.data,
-          });
+          for (var i = 0; i < res.data.length; i++) {
+            _this.data.who.push(res.data[i].sender_id)
+            var post = {title: '', s_id: ''}
+            post['title'] = res.data[i].title
+            post['s_id'] = []
+            postsTemp.push(post)
+            console.log(postsTemp)
+          }
+          db.collection("user").get({
+            success: function success(res) {
+              for (var i = 0; i < res.data.length; i++) {
+                var yourid = res.data[i]._id
+                for (var j = 0; j < _this.data.who.length; j++) {
+                  if (yourid == _this.data.who[j]) {
+                    postsTemp[j]['s_id'] = res.data[i].stuid
+                    _this.setData({
+                      posts:postsTemp,
+                    })
+                  }
+                }
+              }
+              console.log(_this.data.posts)
+            },
+            fail: function fail(err) {
+                wx.showToast({
+                    icon: "none",
+                    title: "查询记录失败"
+                });
+            }
+        });
       },
       fail: function fail(err) {
           wx.showToast({

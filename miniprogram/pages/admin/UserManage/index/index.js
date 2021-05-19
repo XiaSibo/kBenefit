@@ -6,7 +6,8 @@ Page({
       active: 0,
       user: [],
       value:'',
-      usercopy:[]
+      usercopy:[],
+      floorstatus:false,
   },
   onChange(e) {
     this.setData({
@@ -118,24 +119,24 @@ onLoad: function onLoad(options) {
   });
 },
 onDel: function onDel(e) {
-  var _this2 = this;
-  var id = e.currentTarget.dataset.id;
-  var db = wx.cloud.database();
-  db.collection("user").doc(id).remove({
-      success: function success(res) {
-          wx.showToast({
-              title: "删除成功"
-          });
-          _this2.onLoad();
-          //删除成功重新加载
-                  },
-      fail: function fail(err) {
-          wx.showToast({
-              title: "删除失败"
-          });
-      }
-  });
-  console.log(id);
+  // var _this2 = this;
+  // var id = e.currentTarget.dataset.id;
+  // var db = wx.cloud.database();
+  // db.collection("user").doc(id).remove({
+  //     success: function success(res) {
+  //         wx.showToast({
+  //             title: "删除成功"
+  //         });
+  //         _this2.onLoad();
+  //         //删除成功重新加载
+  //                 },
+  //     fail: function fail(err) {
+  //         wx.showToast({
+  //             title: "删除失败"
+  //         });
+  //     }
+  // });
+  // console.log(id);
 },
   onUpdate: function onUpdate(e) {
     

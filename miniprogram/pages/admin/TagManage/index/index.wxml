@@ -1,2 +1,43 @@
-<!--miniprogram/pages/admin/tagManage/index/index.wxml-->
-<text>miniprogram/pages/admin/tagManage/index/index.wxml</text>
+<view>
+    <van-icon name="back-top" class='goTop' hidden='{{!floorstatus}}' bind:tap="goTop"/>
+    <movable-area class="myArea">
+        <navigator url="/pages/admin/TagManage/AddKeys/AddKeys">
+            <van-icon name="add" size="90rpx" color="#ddd" class="goAdd"/>
+        </navigator>
+        <view class="userAdmin" wx:if="{{tagKeys}}">
+        <view class="userAdminHead">
+            <view class="userAdminHeadthOne">标签键</view>
+            <view class="userAdminHeadthTwo">操作</view>
+        </view>
+        <block wx:for="{{tagKeys}}" wx:key="{{}}">
+            <view class="userAdminBodyOne" wx:if="{{index%2==0}}">
+                <view class="UserAdminBodyID">{{item.name}}</view>
+                <view class="UserOperate">
+                    <van-button class="myButton" round type="info" size="mini" type="primary" bind:tap="onModifyKeys" data-id="{{item._id}}">修改</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="info" bind:tap="onModify" data-id="{{item._id}}">编辑</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="warning" bind:tap="onDel" data-id="{{item._id}}">删除</van-button>
+                </view>
+            </view>
+            <view class="userAdminBodyTwo" wx:else>
+                <view class="UserAdminBodyID">{{item.name}}</view>
+                <view class="UserOperate">
+                    <van-button class="myButton" round type="info" size="mini" type="primary" bind:tap="onModifyKeys" data-id="{{item._id}}">修改</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="info" bind:tap="onModify" data-id="{{item._id}}">编辑</van-button>
+                    <van-button class="myButton" round type="info" size="mini" type="warning" bind:tap="onDel" data-id="{{item._id}}">删除</van-button>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="none" wx:else>
+        <text>暂时没有标签键！</text>
+    </view>
+    <view class="space"></view>
+    <van-tabbar class="myTabBar" active="{{ active }}" bind:change="onTabBarChange">
+        <van-tabbar-item icon="user-o" class="myTabBar">用户管理</van-tabbar-item>
+        <van-tabbar-item icon="label-o" class="myTabBar">标签管理</van-tabbar-item>
+        <van-tabbar-item icon="notes-o" class="myTabBar">帖子管理</van-tabbar-item>
+    </van-tabbar>
+</movable-area>
+</view>
+
+

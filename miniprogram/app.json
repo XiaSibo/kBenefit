@@ -10,6 +10,11 @@
     "pages/admin/UserManage/modify/modify",
     "pages/admin/PostManage/index/index",
     "pages/admin/TagManage/index/index",
+    "pages/admin/TagManage/AddKeys/AddKeys",
+    "pages/admin/TagManage/ValueIndex/ValueIndex",
+    "pages/admin/TagManage/AddValues/AddValues",
+    "pages/admin/TagManage/ModifyKeys/ModifyKeys",
+    "pages/admin/TagManage/ModifyValues/ModifyValues",
     "pages/postcreating/postcreating"
   ],
   "window": {
@@ -32,6 +37,7 @@
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-tree-select": "@vant/weapp/tree-select/index",
+    "color-picker": "/components/color-picker/color-picker",
     "van-popup": "@vant/weapp/popup/index",
     "van-field": "@vant/weapp/field/index",
     "van-uploader": "@vant/weapp/uploader/index",

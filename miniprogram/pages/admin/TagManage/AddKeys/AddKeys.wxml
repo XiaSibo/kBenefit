@@ -1,0 +1,15 @@
+<view class="upUser">
+    <form bindsubmit="upKey">
+        <van-cell-group>
+            <van-field
+                value="{{ tagKey }}"
+                required
+                clearable
+                label="标签键"
+                placeholder="请输入标签键名称"
+                bind:change="onTagKey"
+            />
+        </van-cell-group>
+        <van-button icon="add-o" size="200px" type="primary" block class="addButton" formType="submit">新建标签键</van-button>
+    </form>
+</view>
