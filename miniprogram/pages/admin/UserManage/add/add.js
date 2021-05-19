@@ -128,6 +128,32 @@ Page({
             itemsTemp.push(item)
           }
           console.log(_this.data.items)
+          db.collection("tag").get({
+            success: function success(res) {
+              for (var i = 0; i < res.data.length; i++) {
+                var yourid = res.data[i].class_id
+                for (var j = 0; j < _this.data.who.length; j++) {
+                  if (yourid == _this.data.who[j]) {
+                    console.log('baka')
+                    var temp = {text: '', id: ''}
+                    temp['text'] = res.data[i].value
+                    temp['id'] = res.data[i]._id
+                    itemsTemp[j]['children'].push(temp)
+                    _this.setData({
+                      items:itemsTemp,
+                    })
+                  }
+                }
+              }
+              console.log(_this.data.items)
+            },
+            fail: function fail(err) {
+                wx.showToast({
+                    icon: "none",
+                    title: "查询记录失败"
+                });
+            }
+        });
         },
         fail: function fail(err) {
             wx.showToast({
@@ -136,32 +162,6 @@ Page({
             });
         }
     });
-    db.collection("tag").get({
-      success: function success(res) {
-        for (var i = 0; i < res.data.length; i++) {
-          var yourid = res.data[i].class_id
-          for (var j = 0; j < _this.data.who.length; j++) {
-            if (yourid == _this.data.who[j]) {
-              console.log('baka')
-              var temp = {text: '', id: ''}
-              temp['text'] = res.data[i].value
-              temp['id'] = res.data[i]._id
-              itemsTemp[j]['children'].push(temp)
-              _this.setData({
-                items:itemsTemp,
-              })
-            }
-          }
-        }
-        console.log(_this.data.items)
-      },
-      fail: function fail(err) {
-          wx.showToast({
-              icon: "none",
-              title: "查询记录失败"
-          });
-      }
-  });
   },
 
   /**

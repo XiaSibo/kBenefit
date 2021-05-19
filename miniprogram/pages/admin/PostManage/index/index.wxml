@@ -1,0 +1,35 @@
+<view>
+    <van-icon name="back-top" class='goTop' hidden='{{!floorstatus}}' bind:tap="goTop"/>
+    <van-search
+      value="{{ value }}"
+      placeholder="请输入搜索关键词"
+      use-action-slot
+      bind:change="onChange"
+    >
+      <view slot="action" bind:tap="onClick">搜索</view>
+    </van-search>
+    <view class="userAdmin" wx:if="{{post}}">
+        <view class="userAdminHead">
+            <view class="userAdminHeadthTwo">帖子标题</view>
+            <view class="userAdminHeadthOne">帖主学工号</view>
+        </view>
+        <block wx:for="{{post}}" wx:key="{{}}">
+            <view class="userAdminBodyOne" wx:if="{{index%2==0}}">
+                <view class="UserAdminBodyID">{{item.title}}</view>
+                <view class="UserAdminBodyName">{{item.sender_id}}</view>
+            </view>
+            <view class="userAdminBodyTwo" wx:else>
+                <view class="UserAdminBodyID">{{item.title}}</view>
+                <view class="UserAdminBodyName">{{item.sender_id}}</view>
+            </view>
+        </block>
+    </view>
+    <view class="none" wx:else>
+        <text>暂时没有用户！</text>
+    </view>
+    <van-tabbar class="myTabBar" active="{{ active }}" bind:change="onTabBarChange">
+        <van-tabbar-item icon="user-o" class="myTabBar">用户管理</van-tabbar-item>
+        <van-tabbar-item icon="label-o" class="myTabBar">标签管理</van-tabbar-item>
+        <van-tabbar-item icon="notes-o" class="myTabBar">帖子管理</van-tabbar-item>
+    </van-tabbar>
+</view>
