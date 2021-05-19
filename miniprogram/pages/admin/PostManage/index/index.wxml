@@ -8,25 +8,26 @@
     >
       <view slot="action" bind:tap="onClick">搜索</view>
     </van-search>
-    <view class="userAdmin" wx:if="{{post}}">
+    <view class="userAdmin" wx:if="{{posts}}">
         <view class="userAdminHead">
             <view class="userAdminHeadthTwo">帖子标题</view>
             <view class="userAdminHeadthOne">帖主学工号</view>
         </view>
-        <block wx:for="{{post}}" wx:key="{{}}">
+        <block wx:for="{{posts}}" wx:key="{{}}">
             <view class="userAdminBodyOne" wx:if="{{index%2==0}}">
                 <view class="UserAdminBodyID">{{item.title}}</view>
-                <view class="UserAdminBodyName">{{item.sender_id}}</view>
+                <view class="UserAdminBodyName">{{item.s_id}}</view>
             </view>
             <view class="userAdminBodyTwo" wx:else>
                 <view class="UserAdminBodyID">{{item.title}}</view>
-                <view class="UserAdminBodyName">{{item.sender_id}}</view>
+                <view class="UserAdminBodyName">{{item.s_id}}</view>
             </view>
         </block>
     </view>
     <view class="none" wx:else>
-        <text>暂时没有用户！</text>
+        <text>暂时没有帖子！</text>
     </view>
+    <view class="space"></view>
     <van-tabbar class="myTabBar" active="{{ active }}" bind:change="onTabBarChange">
         <van-tabbar-item icon="user-o" class="myTabBar">用户管理</van-tabbar-item>
         <van-tabbar-item icon="label-o" class="myTabBar">标签管理</van-tabbar-item>

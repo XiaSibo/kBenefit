@@ -1,0 +1,25 @@
+<view class="upUser">
+    <form bindsubmit="modifyValue">
+        <van-cell-group>
+            <van-field
+                value="{{ tagValue }}"
+                required
+                clearable
+                label="标签值"
+                placeholder="请输入标签值名称"
+                bind:change="onTagValue"
+            />
+        </van-cell-group>
+        <van-field
+             label="标签颜色" 
+             required
+             value="{{tagColor}}" 
+             is-link
+              bind:focus="toPick" 
+              placeholder="请选择标签颜色"
+              bind:change="onTagColor"/>
+        <color-picker bindchangeColor="pickColor" initColor="{{tagColor}}" show="{{pick}}" />
+        <view style="height:50rpx;"></view>
+        <van-button icon="add-o" size="200px" type="primary" block class="addButton" formType="submit">确认修改</van-button>
+    </form>
+</view>

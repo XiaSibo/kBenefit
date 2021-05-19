@@ -59,6 +59,6 @@
             bind:click-nav="onClickNav"
             bind:click-item="onClickItem"
         />
-        <van-button icon="add-o" size="200px" type="primary" block class="addButton" formType="submit">b确认修改</van-button>
+        <van-button icon="add-o" size="200px" type="primary" block class="addButton" formType="submit">确认修改</van-button>
     </form>
 </view>
