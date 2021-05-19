@@ -47,7 +47,6 @@ Component({
         if (this.data.hasMore)
           this.getData();
       }
-      console.log("refresh")
     },
   
     /**
@@ -62,7 +61,6 @@ Component({
         if (this.data.hasMore)
           this.getData();
       }
-      console.log("loadMore")
     },
   
       /**

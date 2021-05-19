@@ -36,7 +36,7 @@
           </view>
           <view class="text">
             <view class="txt">
-              {{item.text}}
+              {{item.text}} post_id: {{item.post_id}}
             </view>
             <view class="comment">
               <view class="pic">
