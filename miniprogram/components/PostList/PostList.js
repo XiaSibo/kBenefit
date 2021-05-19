@@ -44,6 +44,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    onTap: function (e) {
+      wx.navigateTo({
+        url: '/pages/postdetail/postdetail?post_id=' + e.currentTarget.dataset.t,
+      })
+    },
     /**
       * 下拉刷新
       */

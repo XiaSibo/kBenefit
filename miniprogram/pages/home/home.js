@@ -1,5 +1,8 @@
 // miniprogram/pages/home/home.js
 Page({
+  myEventListener: function(e) {
+    console.log(e)
+  },
 
   /**
    * 页面的初始数据

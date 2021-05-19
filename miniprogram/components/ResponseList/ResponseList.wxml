@@ -3,10 +3,10 @@
   <!-- <view class='view-top-bar' /> -->
   <swipe-refresh-layout id='refresh' style='width:100vw;height:0;flex:1;' loadMoreEnable bindrefresh='refresh' bindloadmore='loadMore'>
     <view wx:if='{{!isEmpty}}'>
-      <view class="reply" wx:for='{{list}}' wx:key="index">
+      <view class="reply" wx:for='{{list}}' wx:key="index" bindtap="onTap" data-t="{{item.post_id}}">
         <view class="content">
           <text>
-            回复：{{item.content}}  贴子id(供展示)：{{item.post_id}}
+            回复：{{item.content}}
           </text>
         </view>
         <view class="title">

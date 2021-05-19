@@ -1,7 +1,7 @@
 <view class="index-container">
   <swipe-refresh-layout id='refresh' style='width:100vw;height:0;flex:1;' class="container" loadMoreEnable bindrefresh='refresh' bindloadmore='loadMore'>
     <view wx:if='{{!isEmpty}}'>
-      <view class="post" wx:for="{{postList}}" wx:key="index">
+      <view class="post" wx:for="{{postList}}" wx:key="index" bindtap="onTap" data-t="{{item.post_id}}">
         <view class="box">
           <view class="fromBox">
           <view class="from">
@@ -36,7 +36,7 @@
           </view>
           <view class="text">
             <view class="txt">
-              {{item.text}} post_id: {{item.post_id}}
+              {{item.text}}
             </view>
             <view class="comment">
               <view class="pic">

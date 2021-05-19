@@ -1,4 +1,5 @@
 // miniprogram/pages/postdetail/postdetail.js
+const app = getApp()
 Page({
 
   /**
@@ -255,7 +256,8 @@ Page({
               images: imgCloudPaths,
               time: comment_time,
               inners: [],
-              number: floor_num
+              number: floor_num,
+              post_id: this.data.post_id
             }
           }).then((res) => {
             db.collection('user').doc(this.data.u_id).update({
@@ -279,7 +281,7 @@ Page({
                 // wx.redirectTo({
                 //   url: 'url',
                 // });
-                this.onLoad();
+                this.onLoad({post_id: this.data.post_id});
               })
             });
           }).catch(err => {
@@ -359,14 +361,17 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({
+      post_id: options.post_id
+    })
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
     const db = wx.cloud.database();
     const _ = db.command;
-    var u_id = "cbddf0af60a21a200921493c080f30c5";
-    var post_id = "b00064a760a3879f186e704b30430d2d";
+    var u_id = app.globalData.user[0]._id;
+    var post_id = this.data.post_id;
     this.setData({
       post_responses: []
     });
