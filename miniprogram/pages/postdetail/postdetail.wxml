@@ -1,0 +1,290 @@
+<!-- fixed button -->
+<view class="back_to_top" hover-class="sparkle" hover-stay-time="50" bindtap="backToTop" wx:if="{{not_top}}">
+  <van-icon name="back-top" size="80rpx" color="white"/>
+</view>
+<view class="comment" hover-class="sparkle" hover-stay-time="50" bindtap="showCommentEditor" wx:if="{{1>0}}">
+  <van-icon name="chat-o" size="80rpx" color="white"/>
+</view>
+<view class="delete_post" hover-class="sparkle" hover-stay-time="50" bindtap="deletePost" wx:if="{{1>0}}">
+  <van-icon name="delete-o" size="80rpx" color="white"/>
+</view>
+<!-- main container -->
+<view class="container">
+  <image class="background" src="/image/background1.jpg"  mode="aspectFill"></image>
+  <view class="titleBox">
+    <text class="title">{{post_title}}</text>
+    <view class="tag_container1">
+      <text class="to">To:</text>
+      <view class="tag" wx:for="{{receiver_tags}}" wx:key="index" style="background-color: {{item.tag_style}}">
+        {{item.tag_value}}
+      </view>
+      <view class="to_all_tag" wx:if="{{!receiver_tags.length}}" style="background-color: white">
+        全体用户
+      </view>
+    </view>
+  </view>
+  <view class="topic"> 
+    <view class="sender_info" bindtap="post_checkSenderInfo">
+      <van-image 
+        src="{{post_sender.user_avatar}}"
+        round
+        height="120rpx"
+        width="120rpx"
+        fit="contain"
+        />
+      <view class="info_container">
+        <view class="info">
+          <view class="name_and_sender_tag">
+            <text class="sender_name">{{post_sender.user_name}}</text>
+            <view class="sender_tag">楼主</view>
+            <view class="post_time">
+              {{post_time}}
+            </view>
+          </view>
+          <view class="floor_num">
+              <text>#1</text>
+          </view>
+        </view>
+        <view class="tag_container2">
+          <view class="tag" wx:for="{{post_sender.user_tags}}" wx:key = "index" style="background-color: {{item.tag_style}}">
+            {{item.tag_value}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="post_content">
+      {{post_content}}
+    </view>
+    <view class="image_container">
+      <van-image 
+        wx:for="{{post_images}}"
+        src="{{item}}"
+        wx:key="index"
+        data-index="{{index}}"
+        width="600rpx"
+        fit="widthFix"
+        bindtap="post_previewImg"
+        />
+    </view>
+  </view>
+  <view class="leading_bar">
+    共{{response_num}}条回复
+  </view>
+  <view class="response" wx:for="{{post_responses}}" wx:key="index" data-index="{{index}}" bindtap="showResponseDetail">
+    <view class="sender_info">
+      <van-image 
+        src="{{item.response_sender.user_avatar}}"
+        round
+        height="120rpx"
+        width="120rpx"
+        fit="contain"
+        />
+      <view class="info_container">
+        <view class="info">
+          <view class="name_and_sender_tag">
+            <text class="sender_name">{{item.response_sender.user_name}}</text>
+            <view wx:if="{{item.response_sender._id == post_sender._id}}" class="sender_tag">楼主</view>
+            <view class="post_time">
+              {{item.response_time}}
+            </view>
+          </view>
+          <view class="floor_num">
+              <text>#{{item.response_number}}</text>
+          </view>
+        </view>
+        <view class="tag_container2">
+          <view class="tag" wx:for="{{item.response_sender.user_tags}}" wx:key ="idx" wx:for-item="tag" style="background-color: {{tag.tag_style}}">
+            {{tag.tag_value}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="response_content">
+      {{item.response_content}}
+    </view>
+    <view class="image_container">
+      <view class="single_image" wx:for="{{item.response_images}}" wx:key="index" wx:for-item="url" wx:if="{{index<4}}">
+        <van-image 
+          src="{{index<3?url:'/image/more.jpg'}}"
+          wx:key="index"
+          width="150rpx"
+          height="150rpx"
+          fit="cover"
+        />
+      </view>
+    </view>
+    <view class="folded_info">
+      <van-icon name="chat" color="#888"/>
+      <view class="folded_inner">{{item.inner_num}}</view>
+      <van-icon name="photo" color="#888"/>
+      <view class="folded_image">{{item.image_num}}</view>
+    </view>
+  </view>
+  <view class="leading_bar">
+    没有更多了
+  </view>
+</view>
+<!-- popup -->
+<van-popup
+  show="{{ popup_show }}"
+  bind:close="onPopupClose"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 90%"
+>
+  <view class="comment" hover-class="sparkle" hover-stay-time="50" bindtap="showInnerEditor" wx:if="{{1>0}}">
+    <van-icon name="chat-o" size="80rpx" color="white"/>
+  </view>
+  <view class="response_detail"> 
+    <view class="sender_info" bindtap="response_checkSenderInfo">
+      <van-image 
+        src="{{popup.response_sender.user_avatar}}"
+        round
+        height="120rpx"
+        width="120rpx"
+        fit="contain"
+        />
+      <view class="info_container">
+        <view class="info">
+          <view class="name_and_sender_tag">
+            <text class="sender_name">{{popup.response_sender.user_name}}</text>
+            <view class="sender_tag" wx:if="{{popup.response_sender._id == post_sender._id}}">楼主</view>
+            <view class="post_time">
+              {{popup.response_time}}
+            </view>
+          </view>
+          <view class="floor_num">
+              <text>#{{popup.response_number}}</text>
+          </view>
+        </view>
+        <view class="tag_container2">
+          <view class="tag" wx:for="{{popup.response_sender.user_tags}}" wx:key = "index" style="background-color: {{item.tag_style}}">
+            {{item.tag_value}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="post_content">
+      {{popup.response_content}}
+    </view>
+    <view class="image_container">
+      <van-image 
+        wx:for="{{popup.response_images}}"
+        src="{{item}}"
+        wx:key="index"
+        data-index="{{index}}"
+        width="600rpx"
+        fit="widthFix"
+        bindtap="response_previewImg"
+        />
+    </view>
+    <view wx:if="{{1>0}}" class="delete_container">
+      <view class="delete" hover-class="delete_hover" hover-stay-time="50" bindtap="deleteComment">
+        <van-icon name="delete" size="60rpx"/>
+      </view>
+    </view>
+  </view>
+  <view class="inner_container">
+    <view class="inner" wx:for="{{popup_inner}}" wx:key="index" >
+      <view class="sender_info" bindtap="inner_checkSenderInfo">
+        <van-image 
+          src="{{item.inner_sender.user_avatar}}"
+          round
+          height="120rpx"
+          width="120rpx"
+          fit="contain"
+          />
+        <view class="info_container">
+          <view class="info">
+            <view class="name_and_sender_tag">
+              <text class="sender_name">{{item.inner_sender.user_name}}</text>
+              <view class="sender_tag" wx:if="{{item.inner_sender._id == post_sender._id}}">楼主</view>
+              <view class="post_time">
+                {{item.inner_time}}
+              </view>
+            </view>
+          </view>
+          <view class="tag_container2">
+            <view class="tag" wx:for="{{item.inner_sender.user_tags}}" wx:key = "index" wx:for-item="tag" style="background-color: {{tag.tag_style}}">
+              {{tag.tag_value}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="post_content">
+        {{item.inner_content}}
+      </view>
+      <view  wx:if="{{1>0}}" class="delete_container">
+        <view class="delete" hover-class="delete_hover" hover-stay-time="50" data-idx="{{index}}" bindtap="deleteInner">
+          <van-icon name="delete" size="60rpx"/>
+        </view>
+      </view>
+    </view>
+  </view>
+</van-popup>
+<van-popup
+  show="{{ comment_editor_show }}"
+  bind:close="onCommentEditorClose"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 70%"
+>
+  <view class="comment_editor_container">
+    <van-field
+      model:value="{{ comment_content }}"
+      placeholder="回复此贴"
+      label="正文"
+      type="textarea"
+      autosize="true"
+      bind:change="onCommentContentChange"
+      maxlength="1000"
+      show-word-limit="true"
+      clearable="true"
+      title-width="100rpx"
+    />
+    <van-cell title="回复图片" value="最多9张" />
+    <view class="image_picker">
+      <van-uploader 
+        file-list="{{ comment_images }}"
+        bind:after-read="afterRead"
+        bind:delete="deleteImg"
+        accept="image"
+        deletable
+        preview-full-image
+        multiple
+        max-count="9"
+      />
+    </view>
+    <view class="comment_submit_container">
+      <van-button type="info" round block disabled="{{!comment_submit_allowed}}" bind:click="uploadCommentToCloud">回复</van-button>
+    </view>
+  </view>
+</van-popup>
+<van-popup
+  show="{{ inner_editor_show }}"
+  bind:close="onInnerEditorClose"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 35%"
+>
+  <view class="inner_editor_container">
+    <van-field
+      model:value="{{ inner_content }}"
+      placeholder="评论{{popup.response_number}}楼"
+      label="评论"
+      type="textarea"
+      autosize="true"
+      bind:change="onInnerContentChange"
+      maxlength="500"
+      show-word-limit="true"
+      clearable="true"
+      title-width="100rpx"
+    />
+    <view class="inner_submit_container">
+      <van-button type="info" round block disabled="{{!inner_submit_allowed}}" bind:click="uploadInnerToCloud">评论</van-button>
+    </view>
+  </view>
+</van-popup>

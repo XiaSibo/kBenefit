@@ -1,0 +1,244 @@
+.background {
+  width: 100%;
+  height: 100%;
+  position: fixed; 
+  background-size: 100% 100%;
+  z-index: -1;
+}
+.titleBox {
+  padding: 20rpx;
+  background-color: #fff;
+  opacity: 0.85;
+}
+.title {
+  font-size: 50rpx;
+  font-weight: 900;
+}
+.tag_container1 {
+  margin-top: 30rpx;
+}
+.tag {
+  display: inline-block;
+  border-radius: 30rpx;
+  color: white;
+  font-size: 30rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin: 10rpx;
+}
+.to_all_tag {
+  display: inline-block;
+  border-radius: 30rpx;
+  color: #888;
+  font-size: 30rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin: 10rpx;
+}
+.to {
+  font-size: 20rpx;
+  font-weight: 700;
+}
+.post_time {
+  font-size: 30rpx;
+  color: #ccc;
+  margin-left: 20rpx;
+  margin-top: 6rpx;
+}
+.topic {
+  margin-top: 10rpx;
+  background-color: white;
+  opacity: 0.85;
+  padding: 20rpx;
+}
+.avatar{
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 60rpx;
+  background-color: #eee;
+  margin-right: 20rpx;
+}
+.sender_info {
+  display: flex;
+  flex-direction: row;
+}
+.info {
+  display: flex;
+  width: 560rpx;
+  height: 50rpx;
+}
+.name_and_sender_tag {
+  display: flex;
+  flex-direction: row;
+  width: 530rpx;
+}
+.sender_name {
+  font-size: 36rpx;
+}
+.sender_tag {
+  border-radius: 10rpx;
+  color: white;
+  background-color: blue;
+  text-align: center;
+  height: 40rpx;
+  font-size: 26rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 15rpx;
+  margin-top: 8rpx;
+}
+.floor_num {
+  color: #ccc;
+  font-size: 30rpx;
+}
+.tag_container2 {
+  margin-top: 20rpx;
+}
+.post_content {
+  margin-top: 20rpx;
+  word-break:break-all;
+  font-size: 36rpx;
+}
+.response_content {
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+  text-overflow:ellipsis;
+  overflow: hidden;
+}
+.image_container {
+  margin-top: 20rpx;
+}
+.post_image {
+  margin-bottom: 20rpx;
+}
+.info_container {
+  margin-left: 20rpx;
+}
+.leading_bar{
+  margin-top: 10rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-color: white;
+  opacity: 0.85;
+}
+.response {
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  padding: 20rpx;
+  background-color: white;
+  opacity: 0.85;
+}
+.single_image {
+  height: 150rpx;
+  width: 150rpx;
+  margin-right: 10rpx;
+  display: inline-block;
+}
+.folded_info {
+  margin-top: 20rpx;
+  display: flex;
+}
+.folded_inner, .folded_image{
+  color: #888;
+  padding-left: 10rpx;
+  padding-right: 30rpx;
+}
+.response_detail {
+  margin-top: 80rpx;
+  background-color: white;
+  opacity: 0.85;
+  padding: 20rpx;
+  border-bottom: solid 5rpx #eee;
+}
+.inner {
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  padding: 20rpx;
+  border-bottom: solid 5rpx #eee;
+}
+.delete_container {
+  display: flex;
+  justify-content: flex-end;
+}
+.delete {
+  height: 80rpx;
+  width: 80rpx;
+}
+.delete_hover {
+  height: 80rpx;
+  width: 80rpx;
+  opacity: 0.6;
+}
+.back_to_top {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 10rpx;
+  bottom: 10rpx;
+  height: 120rpx;
+  width: 120rpx;
+  background-color: #0d0;
+  border-radius: 60rpx;
+  opacity: 0.4;
+  z-index: 4;
+}
+.comment {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 140rpx;
+  bottom: 10rpx;
+  height: 120rpx;
+  width: 120rpx;
+  background-color: #0d0;
+  border-radius: 60rpx;
+  opacity: 0.4;
+  z-index: 4;
+}
+.delete_post {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 10rpx;
+  bottom: 10rpx;
+  height: 120rpx;
+  width: 120rpx;
+  background-color: #0d0;
+  border-radius: 60rpx;
+  opacity: 0.4;
+  z-index: 4;
+}
+.sparkle {
+  opacity: 0.8;
+}
+.comment_editor_container {
+  margin-top: 80rpx;
+}
+.image_picker {
+  padding: 20rpx;
+  border-bottom: solid 2rpx #f0f0f0fe;
+}
+.comment_submit_container {
+  margin-top: 80rpx;
+  margin-left: 200rpx;
+  margin-right: 200rpx;
+}
+.inner_editor_container {
+  margin-top: 80rpx;
+}
+.inner_submit_container {
+  margin-top: 40rpx;
+  margin-left: 200rpx;
+  margin-right: 200rpx;
+}
