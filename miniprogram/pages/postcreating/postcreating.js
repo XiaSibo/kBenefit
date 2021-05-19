@@ -1,10 +1,10 @@
 const app = getApp();
-
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    u_id: "cbddf0af60a21a200921493c080f30c5",
     title: "",
     content: "",
     fileList: [],
@@ -14,13 +14,6 @@ Page({
     show_helper: false,
     show_adder: false,
     can_not_submit: true,
-    all_tags: [
-      {
-        id: "",
-        value: "",
-        color: ""
-      },
-    ],
     tags: [
       {
         id: "1",
@@ -298,7 +291,45 @@ Page({
   onLoad: function (options) {
     this.setData({
       u_id: app.globalData.user[0]._id,
-    })
+    });
+    const db = wx.cloud.database();
+    const _ = db.command;
+    var tags = [];
+    db.collection("tag_class").get().then(res => {
+      var tag_keys = res.data;
+      var setTagTask = tag_keys.map((item, index) => {
+        var tag_key_id = item._id;
+        var tag_key_name = item.name;
+        var group = [];
+        var value_group = [];
+        db.collection("tag").where({
+          class_id: tag_key_id
+        }).get().then(res => {
+          var tags_data = res.data;
+          tags_data.forEach((element, idx) => {
+            group.push({
+              id: element._id,
+              value: element.value,
+              color: element.color,
+              show: false
+            });
+            value_group.push(element.value);
+          })
+        }).then(() => {
+          tags.push({
+            id: tag_key_id,
+            key: tag_key_name,
+            value_group: value_group,
+            group: group
+          });
+        });
+      });
+      Promise.all(setTagTask).then(() => {
+        setTimeout(() => this.setData({
+          tags: tags
+        }), 2000);
+      });
+    });
   },
 
   /**

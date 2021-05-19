@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/admin/UserManage/index/index",
     "pages/home/home",
     "pages/user/user",
@@ -15,7 +14,8 @@
     "pages/admin/TagManage/AddValues/AddValues",
     "pages/admin/TagManage/ModifyKeys/ModifyKeys",
     "pages/admin/TagManage/ModifyValues/ModifyValues",
-    "pages/postcreating/postcreating"
+    "pages/postcreating/postcreating",
+    "pages/postdetail/postdetail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -24,6 +24,8 @@
     "navigationBarTitleText": "千益",
     "navigationBarTextStyle": "black"
   },
+  "sitemapLocation": "sitemap.json",
+
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
     "van-image": "@vant/weapp/image/index",
@@ -63,6 +65,5 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json",
   "enablePullDownRefresh": true
 }
