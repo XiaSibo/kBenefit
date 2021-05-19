@@ -1,5 +1,5 @@
 <view class="index-container">
-  <swipe-refresh-layout id='refresh' class="container" style='width:100vw;height:0;flex:1;' loadMoreEnable bindrefresh='refresh' bindloadmore='loadMore'>
+  <swipe-refresh-layout id='refresh' style='width:100vw;height:0;flex:1;' class="container" loadMoreEnable bindrefresh='refresh' bindloadmore='loadMore'>
     <view wx:if='{{!isEmpty}}'>
       <view class="post" wx:for="{{postList}}" wx:key="index">
         <view class="box">

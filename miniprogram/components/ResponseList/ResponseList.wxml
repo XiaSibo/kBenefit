@@ -3,19 +3,18 @@
   <!-- <view class='view-top-bar' /> -->
   <swipe-refresh-layout id='refresh' style='width:100vw;height:0;flex:1;' loadMoreEnable bindrefresh='refresh' bindloadmore='loadMore'>
     <view wx:if='{{!isEmpty}}'>
-      <block class="reply" wx:for='{{list}}' wx:key="index">
-        <view style="height:200rpx">
-          {{item}}
+      <view class="reply" wx:for='{{list}}' wx:key="index">
+        <view class="content">
+          <text>
+            回复：{{item.content}}
+          </text>
         </view>
-        <!-- <view class="reply">
-          <view class="content">
-            {{item.reply}}
-          </view>
-          <view class="title">
+        <view class="title">
+          <text>
             {{item.title}}
-          </view>
-        </view> -->
-      </block>
+          </text>
+        </view>
+      </view>
       <!-- 上拉加载布局 -->
       <view hidden='{{list.length==0}}'>
         <view wx:if='{{hasMore}}' class='weui-loadmore'>

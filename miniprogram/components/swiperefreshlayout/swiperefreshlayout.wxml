@@ -3,7 +3,7 @@
   data-scrolltop='{{scrollTop}}' data-threshold='{{threshold}}' data-progressbarheight='{{progressBarHeight}}' change:prop='{{scroll.refreshStateChange}}' prop='{{triggered}}'>
   <view class='view-container'>
     <!-- 下拉刷新圆圈 -->
-    <view class='circle-progress-bar' style='background-color:{{backgroundColor}};'>
+    <view class='circle-progress-bar' style='background-color:{{backgroundColor}};' hidden='{{!triggered}}'>
       <text class='iconfont icon-shuaxin' style='font-size:50rpx;color:{{color}};' />
     </view>
     <!-- 刷新中圆圈 -->

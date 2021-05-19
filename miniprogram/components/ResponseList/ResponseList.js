@@ -11,9 +11,55 @@ Component({
    * 组件的初始数据
    */
   data: {
+    rawList: [
+      {
+        content: '回复111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
+        title: '帖子1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
+      },
+      {
+        content: '回复2',
+        title: '帖子2',
+      },
+      {
+        content: '回复3',
+        title: '帖子3',
+      },
+      {
+        content: '回复4',
+        title: '帖子4',
+      },
+      {
+        content: '回复5',
+        title: '帖子5',
+      },
+      {
+        content: '回复6',
+        title: '帖子6',
+      },
+      {
+        content: '回复7',
+        title: '帖子7',
+      },
+      {
+        content: '回复7',
+        title: '帖子7',
+      },
+      {
+        content: '回复8',
+        title: '帖子8',
+      },
+      {
+        content: '回复9',
+        title: '帖子9',
+      },
+      {
+        content: '回复10',
+        title: '帖子10',
+      },
+    ],
     list: [],  // object: {content, title, post_id}
     page: 1,
-    pageSize: 10,
+    pageSize: 6,
     isRequesting: false, // 是否正在请求数据，防止数据的重复加载
     hasMore: true, // 是否还有更多数据
     isEmpty: false // 是否为空数据
@@ -23,7 +69,6 @@ Component({
     attached: function() {
       this.swipeRefresh = this.selectComponent('#refresh')
       this.swipeRefresh.setRefresh(true)
-      this.getData();
     }
   },
 
@@ -42,7 +87,8 @@ Component({
           hasMore: true,
           isEmpty: false
         });
-        this.getData();
+        if (this.data.hasMore)
+          this.getData();
       }
       console.log("refresh")
     },
@@ -56,7 +102,8 @@ Component({
           page: this.data.page + 1,
           isRequesting: true
         });
-        this.getData();
+        if (this.data.hasMore)
+          this.getData();
       }
       console.log("loadMore")
     },
@@ -67,24 +114,31 @@ Component({
     getData: function() {
       setTimeout(() => {
         if (this.data.page == 1) {
-          // 请求数据库，传过去skip = (page - 1) * pageSize, limit = pageSize
-          // 得到返回值以后直接赋值给list
           this.setData({
-            list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            isRequesting: false,
-            hasMore: this.data.list.length < 15  // hasMore根据数据库返回结果来看
-          })
-        } else {
-          // 否则，需要增加一页数据，skip = (page - 1) * pageSize, limit = pageSize
-          // 得到返回值以后concat在this.data.list后面
-          this.setData({
-            list: this.data.list.concat(this.data.list.length + 1),
-            isRequesting: false,
-            hasMore: this.data.list.length < 15  // hasMore根据数据库返回结果来看
+            list: [],
           })
         }
-        this.swipeRefresh.setRefresh(false);
-      }, 3000);
+        // skip: this.data.list.length, limit: pageSize
+        /* 
+          TODO:
+            1. 编写云函数，取得数据库中的真实数据
+                -传入参数: skip: this.data.list.length, limit: pageSize
+                -返回对象数组: [{post_id, content, title}, ...]
+                  --post_id: 用于点击时进入对应的页面
+                  --content: 回复内容
+                  --title: 标题
+            2. .then, 拿到append_data,接下来setData。
+            3. 设置页面跳转（post_id）
+        */
+        var append_data = this.data.rawList.slice(this.data.list.length, this.data.list.length + this.data.pageSize)
+        this.setData({
+          list: this.data.list.concat(append_data),
+          isRequesting: false,
+          hasMore: append_data.length == this.data.pageSize
+        })
+        this.swipeRefresh.setRefresh(false)
+      }, 500);
+      console.log("getdata ing...")
     }
   },
 })

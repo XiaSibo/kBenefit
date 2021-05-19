@@ -13,11 +13,11 @@
 }
 
 .post {
-  width: 100%;
   margin-top: 15rpx;
   margin-left: 15rpx;
   margin-right: 15rpx;
   background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5rpx;
 }
 
 .box {
@@ -151,7 +151,7 @@
 .pic image {
   width: 37rpx;
   height: 37rpx;
-  margin-bottom: 0rpx;
+  margin-bottom: 10rpx;
 }
 
 .view-top-bar {
@@ -175,11 +175,11 @@
 }
 
 .weui-loadmore {
-  width: 65%;
-  margin: 20rpx auto;
+  margin: 15rpx;
   line-height: 1.6em;
   font-size: 28rpx;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .weui-loadmore_tips {

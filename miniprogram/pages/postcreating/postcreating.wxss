@@ -1,0 +1,40 @@
+.header {
+  height: 80rpx;
+  padding: auto;
+  font-size: large;
+  font-weight: 500;
+}
+.image_picker {
+  padding: 20rpx;
+  border-bottom: solid 2rpx #f0f0f0fe;
+}
+.helper {
+  width: 600rpx;
+  padding: 50rpx;
+  font-size: 36rpx;
+
+}
+.tag_display {
+  display: inline;
+  line-height: 60rpx;
+}
+.each_tag {
+  display: inline;
+  margin: 10rpx;
+}
+.adder_container {
+  margin-left: 20rpx;
+  display: inline-block;
+}
+.tag_adder {
+  width: 40rpx;
+  height: 40rpx;
+}
+.hover_adder{
+  opacity: 0.6;
+}
+.submit_container {
+  margin-top: 80rpx;
+  margin-left: 200rpx;
+  margin-right: 200rpx;
+}
