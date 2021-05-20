@@ -161,7 +161,7 @@ Page({
     if (pages.length > 1) {
       var beforePage = pages[pages.length- 2];//获取上一个页面实例对象
       beforePage.changeData();//触发父页面中的方法
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/admin/UserManage/index/index',
       })
       }
