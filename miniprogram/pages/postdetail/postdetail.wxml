@@ -187,7 +187,7 @@
   </view>
   <view class="inner_container">
     <view class="inner" wx:for="{{popup_inner}}" wx:key="index" >
-      <view class="sender_info" bindtap="inner_checkSenderInfo">
+      <view class="sender_info" data-uid="{{item.inner_sender._id}}" bindtap="inner_checkSenderInfo">
         <van-image 
           src="{{item.inner_sender.user_avatar}}"
           round

@@ -1,6 +1,5 @@
 const db = wx.cloud.database()
 var app = getApp()
-var openid;
 Page({
 
     /**
@@ -29,7 +28,6 @@ Page({
                                         success: res => {
                                             // 获取到用户的 openid
                                             console.log("用户的openid:" + res.data.openid);
-                                            openid = res.data.openid;
                                             app.globalData.openid = res.data.openid;
                                         }
                                     });
@@ -59,7 +57,7 @@ Page({
             });
             //从数据库中查找对应_openid的用户是否存在
             db.collection('user').where({
-                _openid: openid
+                _openid: app.globalData.openid
             }).get({
                 success: function (res) {
                     console.log(res.data)
