@@ -81,7 +81,7 @@ Page({
   },
   refreshAva:function refreshAva(e) {
     this.setData({
-      avatarUrl:''
+      avatarUrl:'/images/head.jpg'
     })
   },
   modifyUser: function modifyUser(e) {

@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    u_id: "cbddf0af60a21a200921493c080f30c5",
+    u_id: "",
     popup_show: false,
     comment_editor_show: false,
     inner_editor_show: false,
@@ -18,7 +18,7 @@ Page({
     inner_submit_allowed: false,
     popup: {},
     popup_inner: [],
-    post_id: "b00064a760a3879f186e704b30430d2d",
+    post_id: "",
     post_title: "",
     post_sender: {},
     receiver_tags: [],
@@ -60,6 +60,20 @@ Page({
     // DNF
   },
 
+  formatDate: function (date) {  
+    var y = date.getFullYear();  
+    var m = date.getMonth() + 1;  
+    m = m < 10 ? ('0' + m) : m;  
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    var h = date.getHours();  
+    var minute = date.getMinutes();  
+    minute = minute < 10 ? ('0' + minute) : minute; 
+    var second= date.getSeconds();  
+    second = second < 10 ? ('0' + second) : second;  
+    return y + '-' + m + '-' + d+' '+h+':'+minute+':'+ second;  
+  },
+
   post_previewImg: function(e) {
     var index = e.currentTarget.dataset.index;
     var imgGroup = this.data.post_images;
@@ -97,7 +111,7 @@ Page({
       db.collection("inner").doc(item).get().then(res => {
         var inner_sender_id = res.data.sender_id;
         var inner_content = res.data.content;
-        var inner_time_protocol = res.data.time;
+        var inner_time_protocol = this.dateShift(res.data.time);
         db.collection("user").doc(inner_sender_id).get().then(res => {
           var inner_sender_user_id = res.data.stuid;
           var inner_sender_user_name = res.data.name;
@@ -114,7 +128,6 @@ Page({
             })
           );
           Promise.all(getTagTasks).then(() => {
-            var time_rank = Date.UTC(inner_time_protocol);
             var newList = this.data.popup_inner;
             newList.push({
               inner_sender: {
@@ -125,12 +138,11 @@ Page({
                 user_tags: inner_sender_user_tags,
               },
               inner_content: inner_content,
-              inner_time: this.dateShift(inner_time_protocol),
-              time_rank: time_rank
+              inner_time: inner_time_protocol,
             });
             var compare = function (obj1, obj2) {
-              var val1 = obj1.time_rank;
-              var val2 = obj2.time_rank;
+              var val1 = obj1.inner_time;
+              var val2 = obj2.inner_time;
               if (val1 < val2) {
                 return -1;
               } else if (val1 > val2) {
@@ -244,7 +256,7 @@ Page({
         data.forEach(item => {
           imgCloudPaths.push(item.fileID);
         });
-        const comment_time = Date();
+        const comment_time = this.formatDate(new Date());
         const db = wx.cloud.database();
         const _ = db.command;
         db.collection('post').doc(this.data.post_id).get().then(res => {
@@ -308,7 +320,7 @@ Page({
     });
     const db = wx.cloud.database();
     const _ = db.command;
-    var inner_time = Date();
+    var inner_time = this.formatDate(new Date());
     db.collection('inner').add({
       data: {
         sender_id: this.data.u_id,
@@ -356,8 +368,7 @@ Page({
    */
 
   dateShift: function (date) {
-    var new_date = new Date(date);
-    return new_date.getFullYear() + "-" + (new_date.getMonth() + 1) + "-" + new_date.getDate();
+    return date.substr(0, 10);
   },
 
   onLoad: function (options) {

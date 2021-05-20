@@ -6,7 +6,7 @@
 }
 .image_picker {
   padding: 20rpx;
-  border-bottom: solid 2rpx #f0f0f0fe;
+  border-bottom: solid 2rpx #f0f0f0;
 }
 .helper {
   width: 600rpx;
