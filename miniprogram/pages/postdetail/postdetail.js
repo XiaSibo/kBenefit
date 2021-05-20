@@ -50,21 +50,20 @@ Page({
 
   post_checkSenderInfo: function(e) {
     wx.navigateTo({
-      url: '/page/homepage/homepage?id=' + this.data.post_sender._id
+      url: '/pages/homepage/homepage?id=' + this.data.post_sender._id
     })
   },
 
   response_checkSenderInfo: function(e) {
     wx.navigateTo({
-      url: '/page/homepage/homepage?id=' + this.popup.response_sender._id
+      url: '/pages/homepage/homepage?id=' + this.data.popup.response_sender._id
     })
   },
 
   inner_checkSenderInfo: function(e) {
-    console.log(e.currentTarget);
-    // wx.navigateTo({
-    //   url: '/page/homepage/homepage?id=' + e.currentTarget.dataset.uid
-    // })
+    wx.navigateTo({
+      url: '/pages/homepage/homepage?id=' + e.currentTarget.dataset.uid
+    })
   },
 
   formatDate: function (date) {  
