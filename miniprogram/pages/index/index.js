@@ -66,8 +66,8 @@ Page({
                     //如果数据库中存在openid对应用户,保存用户信息并跳转到homepage
                     if(res.data.length != 0) {
                         app.globalData.user = res.data
-                        wx.navigateTo({
-                          url: '/pages/homepage/homepage',
+                        wx.switchTab({
+                          url: '/pages/home/home',
                         })
                     }
                     //如果不存在该openid对应用户，则跳转到登录页面检验身份
