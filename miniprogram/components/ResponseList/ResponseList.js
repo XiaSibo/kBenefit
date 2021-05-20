@@ -95,12 +95,14 @@ Component({
         })
         await db.collection('response').where({
           _id: _.in(responses)
-        }).skip(this.data.list.length).limit(this.data.pageSize).get()
+        }).orderBy('time', 'desc').get()
         .then(res => {
-          for (var i = 0; i < res.data.length; i ++) {
+          var cnt = 0
+          for (var i = this.data.list.length; i < res.data.length && cnt < this.data.pageSize; i ++) {
             responseList.push({
               post_id: res.data[i].post_id,
               content: res.data[i].content,
+              time: res.data[i].time,
               title: "title"
             })
           }
