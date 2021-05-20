@@ -14,95 +14,7 @@ Page({
     show_helper: false,
     show_adder: false,
     can_not_submit: true,
-    tags: [
-      {
-        id: "1",
-        key: "校区",
-        value_group: [
-          "八里台",
-          "津南",
-          "泰达"
-        ],
-        group: [
-          {
-            id: "11",
-            value: "八里台",
-            color: "red",
-            show: false
-          },
-          {
-            id: "12",
-            value: "津南",
-            color: "green",
-            show: false
-          },
-          {
-            id: "13",
-            value: "泰达",
-            color: "blue",
-            show: false
-          }
-        ]
-      },
-      {
-        id: "2",
-        key: "院系",
-        value_group: [
-          "数学学院",
-          "物理学院",
-          "软件学院"
-        ],
-        group: [
-          {
-            id: "21",
-            value: "数学学院",
-            color: "red",
-            show: false
-          },
-          {
-            id: "22",
-            value: "物理学院",
-            color: "green",
-            show: false
-          },
-          {
-            id: "23",
-            value: "软件学院",
-            color: "blue",
-            show: false
-          }
-        ]
-      },
-      {
-        id: "3",
-        key: "身份",
-        value_group: [
-          "教师",
-          "研究生",
-          "本科生"
-        ],
-        group: [
-          {
-            id: "31",
-            value: "教师",
-            color: "red",
-            show: false
-          },
-          {
-            id: "32",
-            value: "研究生",
-            color: "green",
-            show: false
-          },
-          {
-            id: "33",
-            value: "本科生",
-            color: "blue",
-            show: false
-          }
-        ]
-      }
-    ],
+    tags: [],
     image_cloud_urls: []
   },
 
@@ -196,7 +108,7 @@ Page({
               receiver_tags.push(item.id);
           })
         })
-        const post_time = Date();
+        const post_time = this.formatDate(new Date());
         const db = wx.cloud.database();
         const _ = db.command;
         db.collection('post').add({
@@ -238,6 +150,20 @@ Page({
       cloudPath: fileName,
       filePath: chooseResult.url
     });
+  },
+
+  formatDate: function (date) {  
+    var y = date.getFullYear();  
+    var m = date.getMonth() + 1;  
+    m = m < 10 ? ('0' + m) : m;  
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    var h = date.getHours();  
+    var minute = date.getMinutes();  
+    minute = minute < 10 ? ('0' + minute) : minute; 
+    var second= date.getSeconds();  
+    second = second < 10 ? ('0' + second) : second;  
+    return y + '-' + m + '-' + d+' '+h+':'+minute+':'+ second;  
   },
 
   showTagHelp: function () {

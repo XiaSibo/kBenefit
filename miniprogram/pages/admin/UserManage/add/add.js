@@ -114,7 +114,7 @@ Page({
               db.collection("user").add({
                 data: {
                   _openid:"",
-                  avatarUrl:"",
+                  avatarUrl:"/images/head.jpg",
                   gender:that.data.usersex,
                   info:"",
                   name:that.data.username,
