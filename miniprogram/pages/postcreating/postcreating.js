@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    u_id: "cbddf0af60a21a200921493c080f30c5",
+    u_id: "",
     title: "",
     content: "",
     fileList: [],
@@ -208,7 +208,8 @@ Page({
             time: post_time,
             update: post_time,
             responses: [],
-            receiver_tags: receiver_tags
+            receiver_tags: receiver_tags,
+            floors: 1
           }
         }).then((res) => {
           db.collection('user').doc(this.data.u_id).update({
@@ -219,9 +220,9 @@ Page({
             wx.hideLoading({
               success: (res) => {}
             });
-            // wx.redirectTo({
-            //   url: 'url',
-            // });
+            wx.redirectTo({
+              url: '/pages/postdetail/postdetail?post_id=' + res._id,
+            });
           })
         }).catch(err => {
           console.log(err);
