@@ -6,6 +6,7 @@
       <view class="reply" wx:for='{{list}}' wx:key="index" bindtap="onTap" data-t="{{item.post_id}}">
         <view class="content">
           <text>
+            {{item.time}}
             回复：{{item.content}}
           </text>
         </view>

@@ -49,15 +49,21 @@ Page({
   },
 
   post_checkSenderInfo: function(e) {
-    // DNF
+    wx.navigateTo({
+      url: '/pages/homepage/homepage?id=' + this.data.post_sender._id
+    })
   },
 
   response_checkSenderInfo: function(e) {
-    // DNF
+    wx.navigateTo({
+      url: '/pages/homepage/homepage?id=' + this.data.popup.response_sender._id
+    })
   },
 
   inner_checkSenderInfo: function(e) {
-    // DNF
+    wx.navigateTo({
+      url: '/pages/homepage/homepage?id=' + e.currentTarget.dataset.uid
+    })
   },
 
   formatDate: function (date) {  

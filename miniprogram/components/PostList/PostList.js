@@ -129,14 +129,9 @@ Component({
             cur_user_tags = res.data.tags
           })
 
-          await db.collection('post').get().then(async res => {
-            var cur_beg
+          await db.collection('post').where({}).orderBy('time', 'desc').get().then(async res => {
             var cnt = 0
-            var ed
-            if (this.data.beg == 0) ed = res.data.length - 1
-            else ed = this.data.beg
-            for (var i = ed; i >= 0 && cnt < this.data.pageSize; i --) {
-              cur_beg = i
+            for (var i = this.data.postList.length; i < res.data.length && cnt < this.data.pageSize; i ++) {
               var receiver_tags = res.data[i].receiver_tags
               var can_receive = false
               for (var j = 0, len1 = cur_user_tags.length; j < len1; j ++) {
@@ -148,6 +143,8 @@ Component({
                 }
                 if (can_receive) break;
               }
+              
+              if (receiver_tags.length == 0) can_receive = true
               if (!can_receive) continue;
               cnt ++
               var avatarUrl = ""
@@ -177,27 +174,19 @@ Component({
                 })
               }
 
-              var date = new Date(res.data[i].time)
-              var y = date.getFullYear();  
-              var m = date.getMonth() + 1;  
-              m = m < 10 ? ('0' + m) : m;  
-              var d = date.getDate();
-              d = d < 10 ? ('0' + d) : d;
-
               var u = res.data[i]
               append_data.push({
                 post_id: u._id,
                 avatarUrl: avatarUrl,
                 fromTags: fromTags,
                 toTags: toTags,
-                date: y + '/' + m + '/' + d,
+                date: res.data[i].time.substr(0, 10),
                 title: u.title,
                 text: u.content,
                 commentCnt: u.responses.length
               })
 
             }
-            this.data.beg = cur_beg - 1
           })
 
            this.setData({
@@ -225,7 +214,7 @@ Component({
             avatarUrl = res.data.avatarUrl
             fromTags_id = res.data.tags
             // 选取需要的部分(相当于做了skip和limit)
-            posts = posts.slice(this.data.postList.length, this.data.postList.length + this.data.pageSize)
+            // posts = posts.slice(this.data.postList.length, this.data.postList.length + this.data.pageSize)
           })
 
           for (var i = 0, len = fromTags_id.length; i < len; i ++) {
@@ -244,8 +233,10 @@ Component({
           // 评论数
           await db.collection('post').where({
             _id: _.in(posts)
-          }).get().then(async res => {
-            for (var i = 0, len = res.data.length; i < len; i ++) {
+          }).orderBy('time', 'desc').get().then(async res => {
+            var cnt = 0
+            for (var i = this.data.postList.length; i < res.data.length && cnt < this.data.pageSize; i ++) {
+              cnt ++
               var toTags = []
               await db.collection('tag').where({
                 _id: _.in(res.data[i].receiver_tags)
@@ -258,19 +249,12 @@ Component({
                 }
               })
 
-              var date = new Date(res.data[i].time)
-              var y = date.getFullYear();  
-              var m = date.getMonth() + 1;  
-              m = m < 10 ? ('0' + m) : m;  
-              var d = date.getDate();
-              d = d < 10 ? ('0' + d) : d;
-
               append_data.push({
                 post_id: res.data[i]._id,
                 avatarUrl: avatarUrl,
                 fromTags: fromTags,
                 toTags: toTags,
-                date: y + '/' + m + '/' + d,
+                date: res.data[i].time.substr(0, 10),
                 title: res.data[i].title,
                 text: res.data[i].content, 
                 commentCnt: res.data[i].responses.length
