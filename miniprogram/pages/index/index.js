@@ -55,6 +55,7 @@ Page({
             that.setData({
                 isHide: false
             });
+            console.log(app.globalData.openid)
             //从数据库中查找对应_openid的用户是否存在
             db.collection('user').where({
                 _openid: app.globalData.openid

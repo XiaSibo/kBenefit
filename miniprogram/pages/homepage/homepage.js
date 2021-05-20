@@ -9,7 +9,8 @@ Page({
     tags: [],
     userInfo: {},
     info: "",
-    isHidden: true
+    isHidden: true,
+    isSelf: true
   },
 
   change_avatar: function () {
@@ -75,11 +76,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.id)
+    console.log(app.globalData.user[0]._id)
+    if(app.globalData.user[0]._id == options.id) {
+      this.setData({
+        isSelf: false
+      })
+    }
+    else {
+      this.setData({
+        isSelf: true
+      })
+    }
     const DB = wx.cloud.database()
     const _ = DB.command
 
     DB.collection('user')
-      .doc(app.globalData.user[0]._id) // 获得user 的 _id 进行更换
+      .doc(options.id) // 获得user 的 _id 进行更换
       .get({
         success: res => {
           this.setData({
