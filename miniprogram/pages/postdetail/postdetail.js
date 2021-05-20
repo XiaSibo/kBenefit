@@ -339,7 +339,7 @@ Page({
               inner_editor_show: false,
               popup_show: false
             });
-            this.onLoad();
+            this.onLoad({post_id: this.data.post_id});
             // wx.redirectTo({
             //   url: 'url',
             // });
