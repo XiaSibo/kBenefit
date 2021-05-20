@@ -395,17 +395,30 @@ Page({
     db.collection("post").doc(post_id).get().then(res => {
       var post_sender_id = res.data.sender_id;
       var post_responses_id = res.data.responses;
-      this.setData({
-        u_id: u_id,
-        post_id: post_id,
-        post_title: res.data.title,
-        post_content: res.data.content,
-        post_images: res.data.images,
-        post_time: this.dateShift(res.data.time),
-        post_update: this.dateShift(res.data.update),
-        receiver_tags: res.data.receiver_tags,
-        response_num: res.data.responses.length
-      });
+      var post_receiver_tags_id = res.data.receiver_tags;
+      var post_receiver_tags = [];
+      var getReceiverTags = post_receiver_tags_id.map((item, index) => db.collection("tag")
+        .doc(item).get().then(res => {
+          post_receiver_tags.push({
+            tag_id: res.data._id,
+            tag_style: res.data.color,
+            tag_value: res.data.value 
+          });
+        })
+      );
+      Promise.all(getReceiverTags).then(() => {
+        this.setData({
+          u_id: u_id,
+          post_id: post_id,
+          post_title: res.data.title,
+          post_content: res.data.content,
+          post_images: res.data.images,
+          post_time: this.dateShift(res.data.time),
+          post_update: this.dateShift(res.data.update),
+          receiver_tags: post_receiver_tags,
+          response_num: res.data.responses.length
+        });
+      })
       db.collection("user").doc(post_sender_id).get().then(res => {
         var post_sender_user_id = res.data.sender_stuid;
         var post_sender_user_name = res.data.name;
@@ -498,7 +511,9 @@ Page({
         });
       }).then(() => {
         wx.hideLoading({
-          success: (res) => {}
+          success: (res) => {
+            console.log(this.data.receiver_tags);
+          }
         });
       })
     })
