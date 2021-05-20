@@ -26,6 +26,18 @@ Page({
             duration: 2000
           })
           app.globalData.user = res.data;
+          //解除当前微信用户绑定的账号
+          db.collection("user").where({
+            _openid: app.globalData.openid
+          }).update({
+            data: {
+              _openid: ""
+            },
+            success: function (res) {
+              console.log(res.data)
+            }
+          })
+          //将当前微信用户与当前登录的账号绑定
           db.collection("user").doc(app.globalData.user[0]._id).update({
             data: {
               _openid: app.globalData.openid
