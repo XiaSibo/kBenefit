@@ -8,23 +8,22 @@
       <van-button size="small" type="primary" bind:click="change_avatar">更换头像</van-button>
     </view>
 
-
-    <text>学工号： {{userInfo.stuid}}</text>
-    <text>姓名： {{userInfo.name}}</text>
-    <text>性别： {{userInfo.gender}}</text>
-    <view class="tags">
-      <text>标签：</text>
+    <van-cell-group>
+      <van-cell title="学工号" value="{{userInfo.stuid}}" />
+      <van-cell title="姓名" value="{{userInfo.name}}" />
+      <van-cell title="性别" value="{{userInfo.gender}}" />
+      <van-cell title="标签" value="标签内容" is-link arrow-direction="down" />
       <view class="tag" wx:for="{{tags}}" wx:key="index">
-        {{item.value}}
+        <van-cell title="" value="{{item.value}}" />
       </view>
-    </view>
-    <text>简介： {{userInfo.info}}</text>
+      <van-cell title="简介" value="{{userInfo.info}}" />
+    </van-cell-group>
 
     <view style="text-align: center;">
       <van-button size="small" type="primary" bind:click="change_info">编辑简介</van-button>
     </view>
     <view style="text-align: center;" hidden="{{isHidden}}">
-      <textarea class="textarea" placeholder="点击编辑个人简介" model:value="{{info}}"/>
+      <textarea class="textarea" placeholder="点击编辑个人简介" model:value="{{info}}" />
       <van-button size="small" type="primary" bind:click="change_info_confirm">确认</van-button>
     </view>
   </view>

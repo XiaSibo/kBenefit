@@ -46,8 +46,8 @@ Page({
               console.log(res.data)
             }
           })
-          wx.switchTab({
-            url: '/pages/home/home',
+          wx.navigateTo({
+            url: '/pages/homepage/homepage',
           })
         } else {
           wx.showToast({

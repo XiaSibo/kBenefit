@@ -50,7 +50,7 @@ Page({
         if (e.detail.userInfo) {
             //用户按了允许授权按钮
             var that = this;
-            // 获取到用户的信息了，打印到控制台上看下
+            // 获取用户信息
             console.log("用户的信息如下：");
             console.log(e.detail.userInfo);
             //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
@@ -66,8 +66,8 @@ Page({
                     //如果数据库中存在openid对应用户,保存用户信息并跳转到homepage
                     if(res.data.length != 0) {
                         app.globalData.user = res.data
-                        wx.switchTab({
-                          url: '/pages/home/home',
+                        wx.navigateTo({
+                          url: '/pages/homepage/homepage',
                         })
                     }
                     //如果不存在该openid对应用户，则跳转到登录页面检验身份
