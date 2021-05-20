@@ -181,6 +181,7 @@ Component({
                 fromTags: fromTags,
                 toTags: toTags,
                 date: res.data[i].time.substr(0, 10),
+                time: res.data[i].time.substr(10),
                 title: u.title,
                 text: u.content,
                 commentCnt: u.responses.length
@@ -255,6 +256,7 @@ Component({
                 fromTags: fromTags,
                 toTags: toTags,
                 date: res.data[i].time.substr(0, 10),
+                time: res.data[i].time.substr(10),
                 title: res.data[i].title,
                 text: res.data[i].content, 
                 commentCnt: res.data[i].responses.length

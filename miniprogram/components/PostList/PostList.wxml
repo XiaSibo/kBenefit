@@ -26,7 +26,12 @@
             </view>
           </view>
           <view class="date">
-            {{item.date}}
+              <view class="in">
+                {{item.date}}
+              </view>
+              <view class="in">
+                {{item.time}}
+              </view>
           </view>
           </view>
         </view>

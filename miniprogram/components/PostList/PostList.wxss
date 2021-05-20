@@ -70,9 +70,15 @@
 }
 
 .date {
+  display: flex;
+  flex-wrap: wrap;
+  width: 115rpx;
   font-size: 20rpx;
   color: gray;
-  margin-left: 10rpx;
+}
+
+.date .in {
+  margin-right: 10rpx;
 }
 
 .box .from {
