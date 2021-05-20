@@ -8,7 +8,8 @@ Page({
     data: {
         //判断小程序的API，回调，参数，组件等是否在当前版本可用。
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        isHide: false
+        isHide: false,
+        isLoad: false
     },
 
     onLoad: function () {
@@ -29,6 +30,9 @@ Page({
                                             // 获取到用户的 openid
                                             console.log("用户的openid:" + res.data.openid);
                                             app.globalData.openid = res.data.openid;
+                                            that.setData({
+                                                isLoad: true
+                                            })
                                         }
                                     });
                                 }
@@ -55,6 +59,7 @@ Page({
             that.setData({
                 isHide: false
             });
+            console.log(app.globalData.openid)
             //从数据库中查找对应_openid的用户是否存在
             db.collection('user').where({
                 _openid: app.globalData.openid

@@ -4,7 +4,7 @@
     <view style="text-align: center;">
       <van-image width="100" height="100" src="{{userInfo.avatarUrl}}" />
     </view>
-    <view style="text-align: center;margin-bottom:10%;">
+    <view style="text-align: center;margin-bottom:10%;" hidden="{{isSelf}}">
       <van-button size="small" type="primary" bind:click="change_avatar">更换头像</van-button>
     </view>
 
@@ -19,7 +19,7 @@
       <van-cell title="简介" value="{{userInfo.info}}" />
     </van-cell-group>
 
-    <view style="text-align: center;">
+    <view style="text-align: center;" hidden="{{isSelf}}">
       <van-button size="small" type="primary" bind:click="change_info">编辑简介</van-button>
     </view>
     <view style="text-align: center;" hidden="{{isHidden}}">

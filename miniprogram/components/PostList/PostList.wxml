@@ -21,12 +21,20 @@
           to
           </view>
           <view class="tags">
+            <view class="tag" wx:if="{{item.toTags.length == 0}}" style="background-color:pink">
+              全体用户
+            </view>
             <view class="tag" wx:for="{{item.toTags}}" wx:key="index" wx:if="{{index < 3}}" style="background-color:{{item.color}}">
               {{item.value}}
             </view>
           </view>
           <view class="date">
-            {{item.date}}
+              <view class="in">
+                {{item.date}}
+              </view>
+              <view class="in">
+                {{item.time}}
+              </view>
           </view>
           </view>
         </view>
