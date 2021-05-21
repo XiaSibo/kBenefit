@@ -108,6 +108,7 @@ onLoad: function onLoad(options) {
           _this.setData({
               user: res.data,
               usercopy: res.data
+
           });
       },
       fail: function fail(err) {
@@ -119,24 +120,95 @@ onLoad: function onLoad(options) {
   });
 },
 onDel: function onDel(e) {
-  // var _this2 = this;
-  // var id = e.currentTarget.dataset.id;
-  // var db = wx.cloud.database();
-  // db.collection("user").doc(id).remove({
-  //     success: function success(res) {
-  //         wx.showToast({
-  //             title: "删除成功"
-  //         });
-  //         _this2.onLoad();
-  //         //删除成功重新加载
-  //                 },
-  //     fail: function fail(err) {
-  //         wx.showToast({
-  //             title: "删除失败"
-  //         });
-  //     }
-  // });
-  // console.log(id);
+  var _this2 = this;
+  var id = e.currentTarget.dataset.id;
+  var db = wx.cloud.database();
+  const _ = db.command;
+  var allposts=[]
+  var allresponses=[]
+  var allinners=[]
+  db.collection("user").doc(id).get().then(res => {
+    allposts=res.data.posts,
+    allposts.forEach(post=>{
+      db.collection("post").doc(post).get().then(res=>{
+        var post_responses = res.data.responses;
+        post_responses.forEach(response => {
+          db.collection("response").doc(response).get().then(res => {
+            var response_sender = res.data.sender_id;
+            db.collection("user").doc(response_sender).update({
+              data:{
+                responses: _.pull(response)
+              }
+            })
+            var response_inners = res.data.inners;
+            response_inners.forEach(inner => {
+              db.collection("inner").doc(inner).get().then(res => {
+                var inner_sender = res.data.sender_id;
+                db.collection("user").doc(inner_sender).update({
+                  data:{
+                    inners: _.pull(inner)
+                  }
+                })
+              })
+              db.collection("inner").doc(inner).remove();
+            })
+          })
+          db.collection("response").doc(response).remove();
+        })
+      })
+      db.collection("post").doc(post).remove();
+    })
+    allresponses=res.data.responses;
+    allresponses.forEach(response => {
+      db.collection("response").doc(response).get().then(res => {
+        var response_inners = res.data.inners;
+        response_inners.forEach(inner => {
+          db.collection("inner").doc(inner).get().then(res => {
+            var inner_sender = res.data.sender_id;
+            db.collection("user").doc(inner_sender).update({
+              data:{
+                inners: _.pull(inner)
+              }
+            })
+          })
+          db.collection("inner").doc(inner).remove();
+        })
+        var response_post_id = res.data.post_id;
+        db.collection("post").doc(response_post_id).update({
+          data:{
+            responses: _.pull(response)
+          }
+        });
+      });
+      db.collection("response").doc(response).remove();
+    })
+    allinners=res.data.inners;
+    allinners.forEach(inner => {
+      db.collection("inner").doc(inner).get().then(res => {
+        var inner_response_id = res.data.response_id;
+        db.collection("response").doc(inner_response_id).update({
+          data:{
+            inners: _.pull(inner)
+          }
+        })
+      });
+      db.collection("inner").doc(inner).remove();
+    })
+  }).then(()=>{
+    db.collection("user").doc(id).remove({
+      success: function success(res){
+        wx.showToast({
+          title: '删除成功',
+        })
+        _this2.onLoad();
+      },
+      fail:function fail(err){
+        wx.showToast({
+          title: '删除失败',
+        })
+      }
+    });
+  })
 },
   onUpdate: function onUpdate(e) {
     

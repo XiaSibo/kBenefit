@@ -62,6 +62,61 @@ onModifyKeys: function(e) {
     url: '/pages/admin/TagManage/ModifyKeys/ModifyKeys?id=' + e.currentTarget.dataset.id,
     })
 },
+onDel:function(e) {
+  console.log(e.currentTarget.dataset.id)
+  var _this2 = this;
+    var id = e.currentTarget.dataset.id;
+    var db = wx.cloud.database();
+    const _ = db.command;
+    db.collection("tag").where({
+      class_id:id
+    }).get().then((res)=>{
+      var tags = res.data;
+      console.log(tags)
+      tags.forEach(tag => {
+        var tag_id = tag._id
+        console.log(tag_id)
+        db.collection("user").get().then((res)=>{
+          var users = res.data;
+          users.forEach(user => {
+            db.collection("user").doc(user._id).update({
+              data:{
+                tags: _.pull(tag_id)
+              }
+            })
+          })
+        }).then(()=>{
+        db.collection("post").get().then((res)=>{
+          var posts = res.data;
+          posts.forEach(post => {
+            db.collection("post").doc(post._id).update({
+              data:{
+                receiver_tags: _.pull(tag_id)
+              }
+            })
+          })
+        }).then(()=>{
+        db.collection("tag").doc(tag_id).remove()
+      })
+      })
+      })
+    }).then(()=>{
+      db.collection("tag_class").doc(id).remove({
+        success: function (res) {
+          wx.showToast({
+            title: '删除成功',
+          })
+          _this2.onLoad();
+        },
+        fail: function(err) {
+          wx.showToast({
+            title: '删除失败',
+          })
+        }
+      })
+    })
+  
+},
 onLoad: function onLoad(options) {
   var _this = this;
   var db = wx.cloud.database();
@@ -78,9 +133,6 @@ onLoad: function onLoad(options) {
           });
       }
   });
-},
-onDel: function onDel(e) {
-  console.log("11111111111")
 },
   onUpdate: function onUpdate(e) {
     
