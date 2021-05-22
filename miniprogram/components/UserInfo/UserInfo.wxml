@@ -1,7 +1,7 @@
 <view class="container">
-  <navigator class="detail" url="/pages/homepage/homepage">
+  <view class="detail" bindtap="gotohomepage">
     <image src="/images/个人信息.png"></image>
-  </navigator>
+  </view>
     <view class="pic">
         <image src="{{userInfo.avatarUrl}}"/>
     </view>

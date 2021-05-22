@@ -56,6 +56,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    gotohomepage: function() {
+      wx.navigateTo({
+        url: '/pages/homepage/homepage?id=' + app.globalData.user[0]._id
+      })
+    }
   }
 })
