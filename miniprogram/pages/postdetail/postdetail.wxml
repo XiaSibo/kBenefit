@@ -5,7 +5,7 @@
 <view class="comment" hover-class="sparkle" hover-stay-time="50" bindtap="showCommentEditor" wx:if="{{1>0}}">
   <van-icon name="chat-o" size="80rpx" color="white"/>
 </view>
-<view class="delete_post" hover-class="sparkle" hover-stay-time="50" bindtap="deletePost" wx:if="{{1>0}}">
+<view class="delete_post" hover-class="sparkle" hover-stay-time="50" bindtap="deletePost" wx:if="{{can_delete_post}}">
   <van-icon name="delete-o" size="80rpx" color="white"/>
 </view>
 <!-- main container -->
@@ -70,7 +70,13 @@
   <view class="leading_bar">
     共{{response_num}}条回复
   </view>
-  <view class="response" wx:for="{{post_responses}}" wx:key="index" data-index="{{index}}" bindtap="showResponseDetail">
+  <view class="response" 
+    wx:for="{{post_responses}}" 
+    wx:key="index" 
+    data-index="{{index}}" 
+    bindtap="showResponseDetail"
+    wx:if="{{index < pages}}"
+  >
     <view class="sender_info">
       <van-image 
         src="{{item.response_sender.user_avatar}}"
@@ -133,7 +139,7 @@
   position="bottom"
   custom-style="height: 90%"
 >
-  <view class="comment" hover-class="sparkle" hover-stay-time="50" bindtap="showInnerEditor" wx:if="{{1>0}}">
+  <view class="comment" hover-class="sparkle" hover-stay-time="50" bindtap="showInnerEditor" wx:if="{{!is_admin}}">
     <van-icon name="chat-o" size="80rpx" color="white"/>
   </view>
   <view class="response_detail"> 
@@ -179,7 +185,7 @@
         bindtap="response_previewImg"
         />
     </view>
-    <view wx:if="{{1>0}}" class="delete_container">
+    <view wx:if="{{can_delete_comment}}" class="delete_container">
       <view class="delete" hover-class="delete_hover" hover-stay-time="50" bindtap="deleteComment">
         <van-icon name="delete" size="60rpx"/>
       </view>
@@ -215,7 +221,7 @@
       <view class="post_content">
         {{item.inner_content}}
       </view>
-      <view  wx:if="{{1>0}}" class="delete_container">
+      <view  wx:if="{{is_admin || (item.inner_sender._id == u_id)}}" class="delete_container">
         <view class="delete" hover-class="delete_hover" hover-stay-time="50" data-idx="{{index}}" bindtap="deleteInner">
           <van-icon name="delete" size="60rpx"/>
         </view>

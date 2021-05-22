@@ -85,6 +85,17 @@ Page({
     var id = e.currentTarget.dataset.id;
     var db = wx.cloud.database();
     const _ = db.command;
+    db.collection("post").get().then((res)=>{
+      var posts = res.data;
+      console.log(posts)
+      posts.forEach(post => {
+        db.collection("post").doc(post._id).update({
+          data:{
+            receiver_tags: _.pull(id)
+          }
+        })
+      })
+    });
     db.collection("user").get().then((res)=>{
       var users = res.data;
       users.forEach(user => {
@@ -94,17 +105,7 @@ Page({
           }
         })
       })
-    }).then(()=>{
-    db.collection("post").get().then((res)=>{
-      var posts = res.data;
-      posts.forEach(post => {
-        db.collection("post").doc(post._id).update({
-          data:{
-            receiver_tags: _.pull(id)
-          }
-        })
-      })
-    }).then(()=>{
+    });
     db.collection("tag").doc(id).remove({
       success: function (res) {
         wx.showToast({
@@ -117,9 +118,7 @@ Page({
           title: '删除失败',
         })
       }
-    })
-  })
-  })
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -32,9 +32,9 @@
               <view class="in">
                 {{item.date}}
               </view>
-              <view class="in">
+              <!-- <view class="in">
                 {{item.time}}
-              </view>
+              </view> -->
           </view>
           </view>
         </view>

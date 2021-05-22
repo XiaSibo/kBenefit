@@ -11,6 +11,10 @@ Page({
     administrator_password: ""
   },
 
+  input: function () {
+    
+  },
+
   user_login: function () {
     db.collection("user").where({
       stuid: this.data.id,
@@ -55,6 +59,12 @@ Page({
       success: function (res) {
         if (res.data.length != 0) {
           app.globalData.isAdministrator = true;
+          app.globalData.user = [
+            {
+              _id: ""
+            }
+          ];
+
           wx.navigateTo({
             url: '/pages/admin/UserManage/index/index',
           })

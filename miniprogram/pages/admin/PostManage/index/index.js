@@ -58,6 +58,12 @@ goTop: function (e) {  // 一键回到顶部
   }
 },
 
+onDetail: function(e) {
+  wx.navigateTo({
+    url: '/pages/postdetail/postdetail?post_id=' + e.currentTarget.dataset.id,
+    })
+},
+
 onLoad: function onLoad(options) {
   var _this = this;
   var db = wx.cloud.database();
@@ -66,7 +72,8 @@ onLoad: function onLoad(options) {
       success: function success(res) {
           for (var i = 0; i < res.data.length; i++) {
             _this.data.who.push(res.data[i].sender_id)
-            var post = {title: '', s_id: ''}
+            var post = {p_id: '', title: '', s_id: ''}
+            post['p_id'] = res.data[i]._id
             post['title'] = res.data[i].title
             post['s_id'] = []
             postsTemp.push(post)

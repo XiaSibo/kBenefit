@@ -7,6 +7,9 @@ Page({
    */
   data: {
     u_id: "",
+    is_admin: false,
+    can_delete_post: false,
+    can_delete_comment: false,
     popup_show: false,
     comment_editor_show: false,
     inner_editor_show: false,
@@ -27,6 +30,7 @@ Page({
     post_time: "",
     post_update: "",
     post_responses: [],
+    pages: 5,
     response_num: 0
   },
 
@@ -37,15 +41,151 @@ Page({
   },
 
   deletePost: function(e) {
-
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '删除该贴？',
+      success (res) {
+        if (res.confirm) {
+          const db = wx.cloud.database();
+          const _ = db.command;
+          var post_sender_id = that.data.post_sender._id;
+          var post_id = that.data.post_id
+          var post_responses = that.data.post_responses;
+          db.collection("user").doc(post_sender_id).update({
+            data: {
+              posts: _.pull(post_id)
+            }
+          });
+          post_responses.forEach(response => {
+            db.collection("user").doc(response.response_sender._id).update({
+              data: {
+                responses: _.pull(response.response_id)
+              }
+            });
+            response.response_inners.forEach(inner => {
+              db.collection("inner").doc(inner).get().then(res => {
+                db.collection("user").doc(res.data.sender_id).update({
+                  data: {
+                    inners: _.pull(inner)
+                  }
+                });
+                db.collection("inner").doc(inner).remove();
+              })
+            });
+            db.collection("response").doc(response.response_id).remove();
+          });
+          db.collection("post").doc(post_id).remove({
+            success: function(res) {
+              wx.navigateBack({
+                delta: 1,
+              });
+            },
+            fail: function(err) {
+              wx.showToast({
+                title: '删除失败'
+              });
+            }
+          });
+        } else if (res.cancel) {
+          // do nothing
+        }
+      }
+    })
   },
 
   deleteComment: function(e) {
-
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '删除该条回复？',
+      success (res) {
+        if (res.confirm) {
+          var response_id = that.data.popup.response_id;
+          var response_inners = that.data.popup.response_inners;
+          var response_sender_id = that.data.popup.response_sender._id;
+          var post_id = that.data.post_id;
+          const db = wx.cloud.database();
+          const _ = db.command;
+          response_inners.forEach(inner => {
+            db.collection("inner").doc(inner).get().then(res => {
+              var inner_sender_id = res.data.sender_id;
+              db.collection("user").doc(inner_sender_id).update({
+                data: {
+                  inners: _.pull(inner)
+                }
+              })
+            }).then(() => {
+              db.collection("inner").doc(inner).remove();
+            })
+          });
+          db.collection("user").doc(response_sender_id).update({
+            data: {
+              responses: _.pull(response_id)
+            }
+          });
+          db.collection("post").doc(post_id).update({
+            data: {
+              responses: _.pull(response_id)
+            }
+          });
+          db.collection("response").doc(response_id).remove({
+            success: function(res) {
+              that.onPopupClose();
+              that.onLoad({post_id: that.data.post_id});
+            },
+            fail: function(err) {
+              wx.showToast({
+                title: '删除失败'
+              });
+            }
+          });
+        } else if (res.cancel) {
+          // do nothing
+        }
+      }
+    })
   },
 
   deleteInner: function(e) {
-
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '删除该条评论？',
+      success (res) {
+        if (res.confirm) {
+          var inner_id = that.data.popup_inner[e.currentTarget.dataset.idx].inner_id;
+          var inner_response_id =that.data.popup.response_id;
+          var inner_sender_id = that.data.popup_inner[e.currentTarget.dataset.idx].inner_sender._id;
+          const db = wx.cloud.database();
+          const _ = db.command;
+          db.collection("response").doc(inner_response_id).update({
+            data: {
+              inners: _.pull(inner_id)
+            }
+          });
+          db.collection("user").doc(inner_sender_id).update({
+            data: {
+              inners: _.pull(inner_id)
+            }
+          });
+          db.collection("inner").doc(inner_id).remove({
+            success: function(res) {
+              that.onPopupClose();
+              that.onLoad({post_id: that.data.post_id});
+            },
+            fail: function(err) {
+              wx.showToast({
+                title: '删除失败'
+              });
+            }
+          });
+        } else if (res.cancel) {
+          // do nothing
+        }
+      }
+    })
+    
   },
 
   post_checkSenderInfo: function(e) {
@@ -115,6 +255,7 @@ Page({
     const _ = db.command;
     inners.forEach((item, index) => {
       db.collection("inner").doc(item).get().then(res => {
+        var inner_id = res.data._id;
         var inner_sender_id = res.data.sender_id;
         var inner_content = res.data.content;
         var inner_time_protocol = this.dateShift(res.data.time);
@@ -136,6 +277,7 @@ Page({
           Promise.all(getTagTasks).then(() => {
             var newList = this.data.popup_inner;
             newList.push({
+              inner_id: inner_id,
               inner_sender: {
                 _id: inner_sender_id,
                 user_id: inner_sender_user_id,
@@ -159,7 +301,8 @@ Page({
             };
             newList.sort(compare);
             this.setData({
-              popup_inner: newList
+              popup_inner: newList,
+              can_delete_comment: this.data.is_admin || (this.data.popup.response_sender._id == this.data.u_id)
             });
           })
         })
@@ -379,7 +522,10 @@ Page({
 
   onLoad: function (options) {
     this.setData({
-      post_id: options.post_id
+      post_id: options.post_id,
+      u_id: app.globalData.user[0]._id,
+      is_admin: app.globalData.isAdministrator,
+      pages: 5
     })
     wx.showLoading({
       title: '加载中...',
@@ -387,7 +533,6 @@ Page({
     });
     const db = wx.cloud.database();
     const _ = db.command;
-    var u_id = app.globalData.user[0]._id;
     var post_id = this.data.post_id;
     this.setData({
       post_responses: []
@@ -408,7 +553,6 @@ Page({
       );
       Promise.all(getReceiverTags).then(() => {
         this.setData({
-          u_id: u_id,
           post_id: post_id,
           post_title: res.data.title,
           post_content: res.data.content,
@@ -416,7 +560,8 @@ Page({
           post_time: this.dateShift(res.data.time),
           post_update: this.dateShift(res.data.update),
           receiver_tags: post_receiver_tags,
-          response_num: res.data.responses.length
+          response_num: res.data.responses.length,
+          can_delete_post: app.globalData.isAdministrator||(this.data.u_id == post_sender_id)
         });
       })
       db.collection("user").doc(post_sender_id).get().then(res => {
@@ -512,7 +657,7 @@ Page({
       }).then(() => {
         wx.hideLoading({
           success: (res) => {
-            console.log(this.data.receiver_tags);
+
           }
         });
       })
@@ -558,7 +703,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var new_pages = this.data.pages + 5;
+    this.setData({
+      pages: new_pages
+    });
   },
 
   /**

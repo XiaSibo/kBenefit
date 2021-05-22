@@ -14,11 +14,11 @@
             <view class="userAdminHeadthOne">帖主学工号</view>
         </view>
         <block wx:for="{{posts}}" wx:key="{{}}">
-            <view class="userAdminBodyOne" wx:if="{{index%2==0}}">
+            <view class="userAdminBodyOne" bindtap="onDetail" data-id="{{item.p_id}}" wx:if="{{index%2==0}}">
                 <view class="UserAdminBodyID">{{item.title}}</view>
                 <view class="UserAdminBodyName">{{item.s_id}}</view>
             </view>
-            <view class="userAdminBodyTwo" wx:else>
+            <view class="userAdminBodyTwo" bindtap="onDetail" data-id="{{item.p_id}}" wx:else>
                 <view class="UserAdminBodyID">{{item.title}}</view>
                 <view class="UserAdminBodyName">{{item.s_id}}</view>
             </view>
