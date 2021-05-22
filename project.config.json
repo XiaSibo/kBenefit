@@ -41,6 +41,7 @@
     ],
     "minifyWXSS": true
   },
+  "cloudbaseRoot": "cloudbase/",
   "appid": "wxc600d77995af3766",
   "projectname": "kBenefit",
   "libVersion": "2.17.0",

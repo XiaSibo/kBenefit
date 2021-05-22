@@ -13,39 +13,21 @@ Page({
     },
 
     onLoad: function () {
-        var that = this;
-        // 查看是否授权
-        wx.getSetting({
-            success: function (res) {
-                if (res.authSetting['scope.userInfo']) {
-                    wx.getUserInfo({
-                        success: function (res) {
-                            // 在用户授权成功后，调用微信的 wx.login 接口，从而获取code
-                            wx.login({
-                                success: res => {
-                                    // console.log("用户的code:" + res.code);
-                                    wx.request({
-                                        url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxc600d77995af3766&secret=0844aaa7969311c55bb28ad39eb3e056&js_code=' + res.code + '&grant_type=authorization_code',
-                                        success: res => {
-                                            // 获取到用户的 openid
-                                            // console.log("用户的openid:" + res.data.openid);
-                                            app.globalData.openid = res.data.openid;
-                                            that.setData({
-                                                isLoad: true
-                                            })
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
-                } else {
-                    that.setData({
-                        isHide: true
-                    });
-                }
-            }
-        });
+        wx.cloud.callFunction({
+            // 云函数名称
+            name: 'getOpenid',
+            // 传给云函数的参数
+            data: {
+            },
+            success: function(res) {
+            //   console.log(res.result.openid)
+              app.globalData.openid = (res.result.openid);
+            },
+            fail: console.error
+          })
+        this.setData({
+            isLoad: true
+        })
     },
 
     bindGetUserInfo: function (e) {
@@ -67,10 +49,10 @@ Page({
                 success: function (res) {
                     // console.log(res.data)
                     //如果数据库中存在openid对应用户,保存用户信息并跳转到homepage
-                    if(res.data.length != 0) {
+                    if (res.data.length != 0) {
                         app.globalData.user = res.data
                         wx.switchTab({
-                          url: '/pages/home/home',
+                            url: '/pages/home/home',
                         })
                     }
                     //如果不存在该openid对应用户，则跳转到登录页面检验身份
@@ -79,9 +61,9 @@ Page({
                             title: '账号未绑定',
                             icon: 'error',
                             duration: 2000
-                          })
+                        })
                         wx.navigateTo({
-                          url: '/pages/login/login',
+                            url: '/pages/login/login',
                         })
                     }
                 }
@@ -103,9 +85,9 @@ Page({
         }
     },
 
-    toLogin:function() {
+    toLogin: function () {
         wx.navigateTo({
-          url: '/pages/login/login',
+            url: '/pages/login/login',
         })
     }
 })
