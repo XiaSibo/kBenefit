@@ -11,6 +11,10 @@ Page({
     administrator_password: ""
   },
 
+  input: function() {
+
+  },
+
   user_login: function () {
     db.collection("user").where({
       stuid: this.data.id,
