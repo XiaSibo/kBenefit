@@ -48,8 +48,9 @@
             </view>
             <view class="comment">
               <view class="pic">
-                <image src="/images/评论.png"> 
-                </image>
+                <!-- <image src="/images/评论.png"> 
+                </image> -->
+                <van-icon name="comment-o" size="50rpx" />
               </view>
             <view class="cnt">
               {{item.commentCnt}}

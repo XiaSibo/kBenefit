@@ -52,7 +52,6 @@
   border-radius: 10rpx;
   left: 15rpx;
   top: 20rpx;
-  border: 1px solid rgba(0, 0, 0, 0.4)
 }
 .detail image {
   padding-left: -5rpx;

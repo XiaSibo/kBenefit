@@ -1,6 +1,7 @@
 <view class="container">
   <view class="detail" bindtap="gotohomepage">
-    <image src="/images/个人信息.png"></image>
+    <!-- <image src="/images/个人信息.png"></image> -->
+    <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
   </view>
     <view class="pic">
         <image src="{{userInfo.avatarUrl}}"/>

@@ -9,5 +9,7 @@
   </van-tab>
 </van-tabs>
 <navigator class="comment" url="/pages/postcreating/postcreating">
-  <van-image src="/images/待评价.png"></van-image>
+  <!-- <van-image src="/images/待评价.png"></van-image>
+   -->
+   <van-icon name="add-o" color="white" size="80rpx" />
 </navigator>

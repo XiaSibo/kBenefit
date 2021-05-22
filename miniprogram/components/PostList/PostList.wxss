@@ -152,6 +152,8 @@
 
 .comment .cnt {
   width: 70%;
+  margin-left: 10rpx;
+  padding-top: 10rpx;
 }
 
 .pic image {
