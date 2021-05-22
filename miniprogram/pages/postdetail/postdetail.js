@@ -249,7 +249,8 @@ Page({
     this.setData({
       popup_inner: [],
       popup_show: true,
-      popup: this.data.post_responses[e.currentTarget.dataset.index]
+      popup: this.data.post_responses[e.currentTarget.dataset.index],
+      can_delete_comment: this.data.is_admin || (this.data.post_responses[e.currentTarget.dataset.index].response_sender._id == this.data.u_id)
     });
     const db = wx.cloud.database();
     const _ = db.command;
@@ -302,7 +303,6 @@ Page({
             newList.sort(compare);
             this.setData({
               popup_inner: newList,
-              can_delete_comment: this.data.is_admin || (this.data.popup.response_sender._id == this.data.u_id)
             });
           })
         })
