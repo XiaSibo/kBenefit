@@ -48,7 +48,7 @@
             </view>
             <view class="comment">
               <view class="pic">
-                <image src="/images/评论.png">
+                <image src="/images/评论.png"> 
                 </image>
               </view>
             <view class="cnt">
