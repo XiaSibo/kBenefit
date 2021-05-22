@@ -23,12 +23,12 @@ Page({
                             // 在用户授权成功后，调用微信的 wx.login 接口，从而获取code
                             wx.login({
                                 success: res => {
-                                    console.log("用户的code:" + res.code);
+                                    // console.log("用户的code:" + res.code);
                                     wx.request({
                                         url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxc600d77995af3766&secret=0844aaa7969311c55bb28ad39eb3e056&js_code=' + res.code + '&grant_type=authorization_code',
                                         success: res => {
                                             // 获取到用户的 openid
-                                            console.log("用户的openid:" + res.data.openid);
+                                            // console.log("用户的openid:" + res.data.openid);
                                             app.globalData.openid = res.data.openid;
                                             that.setData({
                                                 isLoad: true
@@ -53,19 +53,19 @@ Page({
             //用户按了允许授权按钮
             var that = this;
             // 获取用户信息
-            console.log("用户的信息如下：");
-            console.log(e.detail.userInfo);
+            // console.log("用户的信息如下：");
+            // console.log(e.detail.userInfo);
             //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
             that.setData({
                 isHide: false
             });
-            console.log(app.globalData.openid)
+            // console.log(app.globalData.openid)
             //从数据库中查找对应_openid的用户是否存在
             db.collection('user').where({
                 _openid: app.globalData.openid
             }).get({
                 success: function (res) {
-                    console.log(res.data)
+                    // console.log(res.data)
                     //如果数据库中存在openid对应用户,保存用户信息并跳转到homepage
                     if(res.data.length != 0) {
                         app.globalData.user = res.data

@@ -29,7 +29,7 @@ Page({
           filePath: tempFilePaths, // 小程序临时文件路径
           success: res => {
             // 返回文件 ID
-            console.log(res.fileID)
+            // console.log(res.fileID)
             cloudPath = res.fileID
             that.data.userInfo.avatarUrl = cloudPath;
             that.setData({
@@ -40,7 +40,7 @@ Page({
                 avatarUrl: that.data.userInfo.avatarUrl
               },
               success: function (res) {
-                console.log(res.data)
+                // console.log(res.data)
               }
             })
           },
@@ -67,7 +67,7 @@ Page({
         info: this.data.userInfo.info
       },
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
       }
     })
   },
@@ -76,8 +76,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.id)
-    console.log(app.globalData.user[0]._id)
+    // console.log(options.id)
+    // console.log(app.globalData.user[0]._id)
     if(app.globalData.user[0]._id == options.id) {
       this.setData({
         isSelf: false

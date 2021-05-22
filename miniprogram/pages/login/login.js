@@ -11,17 +11,13 @@ Page({
     administrator_password: ""
   },
 
-  input: function () {
-    
-  },
-
   user_login: function () {
     db.collection("user").where({
       stuid: this.data.id,
       password: this.data.password
     }).get({
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.length != 0) {
           wx.showToast({
             title: '登陆成功',
@@ -35,7 +31,7 @@ Page({
               _openid: app.globalData.openid
             },
             success: function (res) {
-              console.log(res.data)
+              // console.log(res.data)
             }
           })
           wx.switchTab({
@@ -91,7 +87,7 @@ Page({
         _openid: "reset"
       },
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
       }
     })
   },
