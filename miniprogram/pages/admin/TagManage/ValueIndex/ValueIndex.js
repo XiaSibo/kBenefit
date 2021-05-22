@@ -14,12 +14,12 @@ Page({
        active: event.detail 
       });
     if(this.data.active==0) {
-      wx.navigateTo({
+      wx.rediretTo({
         url: '/pages/admin/UserManage/index/index',
         })
     }
     if(this.data.active==2) {
-      wx.navigateTo({
+      wx.rediretTo({
         url: '/pages/admin/PostManage/index/index',
         })
     }
