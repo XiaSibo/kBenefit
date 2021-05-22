@@ -1,5 +1,6 @@
 var app = getApp()
 const db = wx.cloud.database()
+var searchId = "none"
 Page({
 
   /**
@@ -90,7 +91,8 @@ Page({
     }
     const DB = wx.cloud.database()
     const _ = DB.command
-
+    if(options.id) {this.searchId = options.id}
+    else {this.searchId = app.globalData.user[0]._id}
     DB.collection('user')
       .doc(options.id) // 获得user 的 _id 进行更换
       .get({
